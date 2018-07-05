@@ -41,8 +41,8 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads
 
 # TODO: This should be done better
-COPY ./medias/video.y4m /home/pptruser
-COPY ./medias/audio.wav /home/pptruser
+COPY ./medias/alternative-video.y4m /home/pptruser
+COPY ./medias/alternative-audio.wav /home/pptruser
 
 RUN chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /node_modules
