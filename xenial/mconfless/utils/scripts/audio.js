@@ -21,7 +21,7 @@ function sleep(time) {
       '--disable-dev-shm-usage',
       '--use-fake-ui-for-media-stream',
       '--use-fake-device-for-media-stream',
-      '--use-file-for-fake-audio-capture=/home/pptruser/audio.wav'
+      '--use-file-for-fake-audio-capture=/home/pptruser/alternative-audio.wav'
     ]
   }).then(async browser => {
     const promises = []
