@@ -1,0 +1,19 @@
+name: mconfless
+summary: Headless testing the HTML5 client
+maintainer: Pedro Beschorner Marin <pedrobmarin@gmail.com>
+description: |
+  <Multi-line description here>
+tags:
+  # https://jujucharms.com/docs/stable/authors-charm-metadata
+  - performance
+  - streaming
+#subordinate: false
+#provides:
+#  provides-relation:
+#    interface: interface-name
+#requires:
+#  requires-relation:
+#    interface: interface-name
+#peers:
+#  peer-relation:
+#    interface: interface-name

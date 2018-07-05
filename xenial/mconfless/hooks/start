@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+echo "start"
+
+# docker run -i -v /tmp:/tmp --rm --cap-add=SYS_ADMIN --name puppeteer-chrome puppeteer-chrome-linux node -e "`cat yourscript.js`"
