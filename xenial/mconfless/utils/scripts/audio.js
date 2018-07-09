@@ -5,8 +5,7 @@
  */
 
 const puppeteer = require('puppeteer')
-const parallel = 1
-const url = 'http://html5.dev.mconf.com/demo/demoHTML5.jsp?action=create&meetingname=Test+Room&username=Boty+McBotface'
+const url = HOST + '/demo/demoHTML5.jsp?action=create&meetingname=Test+Room&username=Boty+McBotface'
 
 function sleep(time) {
   return new Promise(resolve => {
@@ -25,16 +24,16 @@ function sleep(time) {
     ]
   }).then(async browser => {
     const promises = []
-    for (let i = 0; i < parallel; i++) {
+    for (let i = 0; i < BOTS; i++) {
       console.log('Bot spawned', i)
-      await sleep(2000)
+      await sleep(WAIT)
       promises.push(browser.newPage().then(async page => {
         await page.goto(url)
         await page.waitForSelector('[aria-label="Microphone"]', { timeout: 0 })
         await page.click('[aria-label="Microphone"]')
         await page.waitForSelector('[aria-label="Echo is audible"]', { timeout: 0 })
         await page.click('[aria-label="Echo is audible"]')
-        await page.waitFor(300000)
+        await page.waitFor(LIFE)
       }))
     }
     await Promise.all(promises)

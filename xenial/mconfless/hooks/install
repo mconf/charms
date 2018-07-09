@@ -19,11 +19,14 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get -y install docker-engine
 
-sudo usermod -aG docker $USER
-sudo su - $USER
+sudo usermod -aG docker ubuntu
+sudo su - ubuntu
+
+docker login -u USER -p PASSWORD
+docker pull mconftec/puppeteer:firsttry
+
+cp hooks/run /tmp
+chmod +x /tmp/run
 
 # Copying test scripts
-cp -r utils/scipts /tmp
-
-# Copying fake medias
-cp -r utils/medias /tmp
+cp -r utils/scripts /tmp
