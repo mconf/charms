@@ -19,12 +19,20 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get -y install docker-engine
 
-sudo usermod -aG docker ubuntu
-sudo su - ubuntu
+# To run docker without sudo:
+#  sudo usermod -aG docker ubuntu
+#  sudo su - ubuntu
 
-docker login -u USER -p PASSWORD
-docker pull mconftec/puppeteer:firsttry
+# When trying to run it locally, this might help:
+# https://stackoverflow.com/questions/45731683/docker-pull-operation-not-permitted
+#  sudo systemctl stop docker
+#  echo "{\"storage-driver\": \"overlay\"}" | sudo tee /etc/docker/daemon.json
+#  sudo systemctl start docker
 
+sudo docker login -u DOCKER_USERNAME -p DOCKER_PASSWORD
+sudo docker pull DOCKER_IMAGE
+
+# Copying run script
 cp hooks/run /tmp
 chmod +x /tmp/run
 

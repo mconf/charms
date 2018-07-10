@@ -5,7 +5,9 @@
  */
 
 const puppeteer = require('puppeteer')
-const url = HOST + '/demo/demoHTML5.jsp?action=create&meetingname=Test+Room&username=Boty+McBotface'
+const url = HOST + '/demo/demoHTML5.jsp?action=create' +
+    '&username=Boty+McBotface' +
+    '&meetingname=' + encodeURI(ROOM)
 
 function sleep(time) {
   return new Promise(resolve => {

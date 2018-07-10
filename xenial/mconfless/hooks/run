@@ -4,6 +4,7 @@ set -e
 
 t="listen-only"
 h="https://html5.dev.mconf.com"
+r="Test Room"
 b=1
 w=2000
 l=60000
@@ -12,6 +13,7 @@ usage() {
   echo "Usage: $0"
   echo "  -t test  <mic|cam|all>      default: listen-only"
   echo "  -h host  server url         default: https://html5.dev.mconf.com"
+  echo "  -r room  room name          default: \"Test Room\""
   echo "  -b bots  number of bots     default: 1"
   echo "  -w wait  time between bots  default: 2000 (2 seconds)"
   echo "  -l life  bot life span      default: 60000 (60 seconds)"
@@ -19,7 +21,7 @@ usage() {
 }
 
 # Gather run arguments
-while getopts ":t:h:b:w:l:" o; do
+while getopts ":t:h:r:b:w:l:" o; do
   case "${o}" in
     t)
       t=${OPTARG}
@@ -27,6 +29,9 @@ while getopts ":t:h:b:w:l:" o; do
       ;;
     h)
       h=${OPTARG}
+      ;;
+    r)
+      r=${OPTARG}
       ;;
     b)
       b=${OPTARG}
@@ -43,25 +48,37 @@ while getopts ":t:h:b:w:l:" o; do
   esac
 done
 
-# Copy test script
+echo "Copying test script..."
 case $t in
   mic)
+    echo "Test: audio"
     cp -rf /tmp/scripts/audio.js /tmp/script.js
     ;;
   cam)
+    echo "Test: video"
     cp -rf /tmp/scripts/video.js /tmp/script.js
     ;;
   all)
+    echo "Test: audio and video"
     cp -rf /tmp/scripts/audio-and-video.js /tmp/script.js
     ;;
   *)
+    echo "Test: listen only"
     cp -rf /tmp/scripts/listen-only.js /tmp/script.js
     ;;
 esac
 
+echo "Setting test variables..."
 sed -e "s,HOST,\"$h\",g" -i /tmp/script.js
+echo "Host: $h"
+sed -e "s,ROOM,\"$r\",g" -i /tmp/script.js
+echo "Room: $r"
 sed -e "s,BOTS,$b,g" -i /tmp/script.js
+echo "Bots: $b"
 sed -e "s,WAIT,$w,g" -i /tmp/script.js
+echo "Wait: $w"
 sed -e "s,LIFE,$l,g" -i /tmp/script.js
+echo "Life: $l"
 
+echo "Running Docker..."
 sudo docker run -i --rm --cap-add=SYS_ADMIN --name puppeteer mconftec/puppeteer:firsttry node -e "`cat /tmp/script.js`"
