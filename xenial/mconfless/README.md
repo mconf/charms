@@ -15,13 +15,13 @@ Join bot users in a meeting that can:
 ### Requisites
 
 Installed in your machine:
-[juju]: https://docs.jujucharms.com/2.3/en/reference-install
+[juju](https://docs.jujucharms.com/2.3/en/reference-install)
 *if you want to build the (./utils/dockerfiles/puppeteer/)Dockerfile locally:*
-[docker]: https://docs.docker.com/install/linux/docker-ce/ubuntu
+[docker](https://docs.docker.com/install/linux/docker-ce/ubuntu)
 
 Credentials to:
-[docker-hub]: https://hub.docker.com/r/mconftec/puppeteer
-[aws]: https://docs.jujucharms.com/2.3/en/help-aws
+[Mconftec at docker-hub](https://hub.docker.com/r/mconftec/puppeteer)
+[aws](https://docs.jujucharms.com/2.3/en/help-aws)
 
 ### Usage
 
