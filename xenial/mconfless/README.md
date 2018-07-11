@@ -1,65 +1,114 @@
-# Overview
+# Mconfless
 
-Describe the intended usage of this charm and anything unique about how this
-charm relates to others here.
+Runs automatized tests in BigBlueButton HTML5 client using Headless Chrome and
+Puppeteer.
 
-This README will be displayed in the Charm Store, it should be either Markdown
-or RST. Ideal READMEs include instructions on how to use the charm, expected
-usage, and charm features that your audience might be interested in. For an
-example of a well written README check out Hadoop:
-http://jujucharms.com/charms/precise/hadoop
+## Load testing
 
-Use this as a Markdown reference if you need help with the formatting of this
-README: http://askubuntu.com/editing-help
+Join bot users in a meeting that can:
 
-This charm provides [service][]. Add a description here of what the service
-itself actually does.
+  - share audio
+  - share video
+  - share both audio and video
+  - or simply as listeners
 
-Also remember to check the [icon guidelines][] so that your charm looks good
-in the Juju GUI.
+### Requisites
 
-# Usage
+Installed in your machine:
+[juju]: https://docs.jujucharms.com/2.3/en/reference-install
+*if you want to build the (./utils/dockerfiles/puppeteer/)Dockerfile locally:*
+[docker]: https://docs.docker.com/install/linux/docker-ce/ubuntu
 
+Credentials to:
+[docker-hub]: https://hub.docker.com/r/mconftec/puppeteer
+[aws]: https://docs.jujucharms.com/2.3/en/help-aws
+
+### Usage
+
+#### Locally with docker
+
+Use docker to pull or build puppeteer with headless-chrome
+```shell
+cd utils/dockerfiles/puppeteer
+docker build -t mconftec/puppeteer:firsttry .
+```
+or
+```shell
+sudo docker login
+sudo docker pull mconftec/puppeteer:firsttry
+```
+Copy the scripts to your local /tmp directory
+```shell
+cp -r utils/scripts /tmp
+```
+and run it
+```shell
+cd hooks
+sudo ./run
+```
+the *run* script accept arguments:
+```
+ -t test  <mic|cam|all>      default: listen-only
+ -h host  server url         default: https://html5.dev.mconf.com
+ -r room  room name          default: "Test Room"
+ -b bots  number of bots     default: 1
+ -w wait  time between bots  default: 2000 (2 seconds)
+ -l life  bot life span      default: 60000 (60 seconds)
+```
+Where 5 bots sharing michrophone at "Demo Meeting" with 5 seconds between bots be:
+```shell
+sudo ./run -t mic -r "Demo Meeting" -b 5 -w 5000
+```
+
+#### At AWS Cloud
+
+Juju will automatically run the install script (./hooks/install) when it's
+deployed. Make sure to include your Docker Hub credentials at:
+```shell
+sudo docker login ...
+```
+and set the docker image to use: (currently using *mconftec/puppeteer:firsttry*)
+```shell
+sudo docker pull ...
+```
 Step by step instructions on using the charm:
+```shell
+juju bootstrap aws
+juju set-model-constraints "instance-type=c3.4xlarge"
+juju deploy ./xenial/mconfless --series xenial
+```
+Running the test scripts:
+```shell
+juju run "sudo /tmp/run" --all
+```
+the *run* script accept arguments:
+```
+ -t test  <mic|cam|all>      default: listen-only
+ -h host  server url         default: https://html5.dev.mconf.com
+ -r room  room name          default: "Test Room"
+ -b bots  number of bots     default: 1
+ -w wait  time between bots  default: 2000 (2 seconds)
+ -l life  bot life span      default: 60000 (60 seconds)
+```
+Where 3 bots sharing camera at "Demo Meeting" with 10 seconds between bots be:
+```shell
+juju run "sudo /tmp/run -t cam -r \"Demo Meeting\" -b 3 -w 10000" --all
+```
 
-juju deploy servicename
+##### Scale out usage
 
-and so on. If you're providing a web service or something that the end user
-needs to go to, tell them here, especially if you're deploying a service that
-might listen to a non-default port.
+Add more machines:
+```shell
+juju add-unit --num-units 2 mconfless
+```
+Or remove it:
+```shell
+juju remove-unit mconfless/1
+```
 
-You can then browse to http://ip-address to configure the service.
+##### After usage
 
-## Scale out Usage
-
-If the charm has any recommendations for running at scale, outline them in
-examples here. For example if you have a memcached relation that improves
-performance, mention it here.
-
-## Known Limitations and Issues
-
-This not only helps users but gives people a place to start if they want to help
-you add features to your charm.
-
-# Configuration
-
-The configuration options will be listed on the charm store, however If you're
-making assumptions or opinionated decisions in the charm (like setting a default
-administrator password), you should detail that here so the user knows how to
-change it immediately, etc.
-
-# Contact Information
-
-Though this will be listed in the charm store itself don't assume a user will
-know that, so include that information here:
-
-## Upstream Project Name
-
-  - Upstream website
-  - Upstream bug tracker
-  - Upstream mailing list or contact information
-  - Feel free to add things if it's useful for users
-
-
-[service]: http://example.com
-[icon guidelines]: https://jujucharms.com/docs/stable/authors-charm-icon
+When running this charm at AWS, don't forget to destroy the whole environment
+```shell
+juju destroy-controller aws-us-east-1 --destroy-all-models
+```

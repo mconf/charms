@@ -1,5 +1,5 @@
 name: mconfless
-summary: Headless testing the HTML5 client
+summary: Testing BigBlueButton HTML5 client with Headless Chrome and Puppeteer
 maintainer: Pedro Beschorner Marin <pedrobmarin@gmail.com>
 description: |
   <Multi-line description here>
