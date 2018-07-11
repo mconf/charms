@@ -26,11 +26,13 @@ git clone https://github.com/mconftec/charms
 Juju offers a bootstrap interface for running charms in several cloud services.
 We will explore LXD for local testing the scripts and Amazon Web Service
 for running the tests.
+
 [Juju in cloud](https://docs.jujucharms.com/2.3/en/clouds)
 
 ### Locally
 
 [Running Juju with LXD](https://docs.jujucharms.com/2.3/en/clouds-LXD)
+
 *notice that LXD environment can be tricky when trying to run other
 containerized applications*
 
