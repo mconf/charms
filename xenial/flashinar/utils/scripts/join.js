@@ -5,9 +5,10 @@
  */
 
 const puppeteer = require('puppeteer')
-const url = HOST + '/demo/demo1.jsp?action=create' +
+const url = HOST + '/demo/demo3.jsp?action=create' +
     '&username=Boty+McBotface' +
-    '&meetingname=' + encodeURI(ROOM)
+    '&meetingID=' + encodeURI(ROOM) +
+    '&password=student123'
 
 function sleep(time) {
   return new Promise(resolve => {
@@ -17,7 +18,7 @@ function sleep(time) {
 
 (async () => {
   puppeteer.launch({
-    executablePath: '/usr/bin/google-chrome',
+    executablePath: 'google-chrome-unstable',
     headless: false,
     args: [
       '--no-sandbox',

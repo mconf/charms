@@ -5,7 +5,7 @@ set -e
 h="https://sip.dev.mconf.com"
 r="Test Room"
 b=1
-w=2000
+w=10000
 l=60000
 
 usage() {
@@ -13,7 +13,7 @@ usage() {
   echo "  -h host  server url         default: https://sip.dev.mconf.com"
   echo "  -r room  room name          default: \"Test Room\""
   echo "  -b bots  number of bots     default: 1"
-  echo "  -w wait  time between bots  default: 2000 (2 seconds)"
+  echo "  -w wait  time between bots  default: 10000 (10 seconds)"
   echo "  -l life  bot life span      default: 60000 (60 seconds)"
   exit 1
 }
@@ -58,4 +58,4 @@ sed -e "s,LIFE,$l,g" -i /tmp/script.js
 echo "Life: $l"
 
 echo "Running Docker..."
-sudo docker run -i --rm --cap-add=SYS_ADMIN --name puppeteer mconftec/puppeteer:firsttry xvfb node -e "`cat /tmp/script.js`"
+sudo docker run -i --rm --cap-add=SYS_ADMIN --name puppeteer-flash puppeteer-flash:latest xvfb-run -a node -e "`cat /tmp/script.js`"
