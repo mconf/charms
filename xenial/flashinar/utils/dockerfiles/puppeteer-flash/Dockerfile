@@ -41,7 +41,7 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads
 
 # Copy chrome config
-# This will manage to automatically load pepper flash when running the test
+# This will manage to automatically load Pepper Flash when running the test
 RUN mkdir -p /home/pptruser/.config
 COPY ./config/google-chrome-config.tar.gz /home/pptruser
 RUN tar -xzvf /home/pptruser/google-chrome-config.tar.gz -C /home/pptruser/.config \
