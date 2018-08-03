@@ -10,7 +10,7 @@ const reliefTimeout = 2000 // 2 seconds
 const url = HOST + '/demo/demoHTML5.jsp?action=create' +
     '&username=Boty+McBotface' +
     '&meetingname=' + encodeURI(ROOM)
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+const delay = ms => { new Promise(resolve => setTimeout(resolve, ms)) }
 
 async function click(page, element) {
   await page.waitForSelector(element, { timeout: selectorTimeout })

@@ -9,7 +9,7 @@ const url = HOST + '/demo/demo3.jsp?action=create' +
     '&username=Boty+McBotface' +
     '&meetingID=' + encodeURI(ROOM) +
     '&password=student123'
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+const delay = ms => { new Promise(resolve => setTimeout(resolve, ms)) }
 
 (async () => {
   puppeteer.launch({
