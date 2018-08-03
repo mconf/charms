@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+# Installing Docker Engine
+sudo apt-get update
+sudo apt-get install --no-install-recommends \
+  apt-transport-https \
+  curl \
+  software-properties-common
+
+curl -fsSL 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add -
+
+sudo add-apt-repository \
+  "deb https://packages.docker.com/1.13/apt/repo/ \
+  ubuntu-$(lsb_release -cs) \
+  main"
+
+sudo apt-get update
+sudo apt-get -y install docker-engine
+
+sudo docker login -u DOCKER_USERNAME -p DOCKER_PASSWORD
+sudo docker pull DOCKER_IMAGE
+
+# Copying run script
+cp hooks/run /tmp
+chmod +x /tmp/run
+
+# Copying test scripts
+cp -r utils/scripts /tmp
