@@ -9,12 +9,7 @@ const url = HOST + '/demo/demo3.jsp?action=create' +
     '&username=Boty+McBotface' +
     '&meetingID=' + encodeURI(ROOM) +
     '&password=student123'
-
-function sleep(time) {
-  return new Promise(resolve => {
-    setTimeout(resolve, time)
-  })
-}
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 (async () => {
   puppeteer.launch({
@@ -30,14 +25,18 @@ function sleep(time) {
   }).then(async browser => {
     const promises = []
     for (let i = 0; i < BOTS; i++) {
-      console.log('Bot spawned', i)
-      await sleep(WAIT)
+      await delay(WAIT)
       promises.push(browser.newPage().then(async page => {
+        console.log('Spawning bot', i)
         await page.goto(url)
         await page.waitFor(LIFE)
+      }).catch(error => {
+        console.warn('Execution error caught with bot', i)
+        return error
       }))
     }
-    await Promise.all(promises)
-    await browser.close()
+    await Promise.all(promises).then(async () => {
+      await browser.close()
+    })
   })
 })()

@@ -5,14 +5,16 @@
  */
 
 const puppeteer = require('puppeteer')
+const selectorTimeout = 60000 // 60 seconds
+const reliefTimeout = 2000 // 2 seconds
 const url = HOST + '/demo/demoHTML5.jsp?action=create' +
     '&username=Boty+McBotface' +
     '&meetingname=' + encodeURI(ROOM)
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-function sleep(time) {
-  return new Promise(resolve => {
-    setTimeout(resolve, time)
-  })
+async function click(page, element) {
+  await page.waitForSelector(element, { timeout: selectorTimeout })
+  await page.click(element)
 }
 
 (async () => {
@@ -28,23 +30,23 @@ function sleep(time) {
   }).then(async browser => {
     const promises = []
     for (let i = 0; i < BOTS; i++) {
-      console.log('Bot spawned', i)
-      await sleep(WAIT)
+      await delay(WAIT)
       promises.push(browser.newPage().then(async page => {
+        console.log('Spawning bot', i)
         await page.goto(url)
-        await page.waitForSelector('[aria-label="Microphone"]', { timeout: 0 })
-        await page.click('[aria-label="Microphone"]')
-        await page.waitForSelector('[aria-label="Echo is audible"]', { timeout: 0 })
-        await page.click('[aria-label="Echo is audible"]')
-        await page.waitFor(2000)
-        await page.waitForSelector('[aria-label="Open video menu dropdown"]', { timeout: 0 })
-        await page.click('[aria-label="Open video menu dropdown"]')
-        await page.waitForSelector('img[src="/html5client/resources/images/video-menu/icon-webcam-off.svg"]', { timeout: 0 })
-        await page.click('img[src="/html5client/resources/images/video-menu/icon-webcam-off.svg"]')
+        await click(page, '[aria-label="Microphone"]')
+        await click(page, '[aria-label="Echo is audible"]')
+        await page.waitFor(reliefTimeout)
+        await click(page, '[aria-label="Open video menu dropdown"]')
+        await click(page, 'img[src="/html5client/resources/images/video-menu/icon-webcam-off.svg"]')
         await page.waitFor(LIFE)
+      }).catch(error => {
+        console.warn('Execution error caught with bot', i)
+        return error
       }))
     }
-    await Promise.all(promises)
-    await browser.close()
+    await Promise.all(promises).then(async () => {
+      await browser.close()
+    })
   })
 })()
