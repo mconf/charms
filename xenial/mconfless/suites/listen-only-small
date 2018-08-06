@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo $1/run -h "https://lucas.dev.mconf.com" -r "Demo Meeting" -b 10 -w 2000
