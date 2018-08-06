@@ -1,9 +1,9 @@
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 # Build the container:
-# docker build -t puppeteer-html5 .
+# docker build -t mconftec/puppeteer:html5 .
 # Run the container by passing node -e "<yourscript.js content as a string> as the command:
 #  docker run -i --rm --cap-add=SYS_ADMIN \
-#    --name puppeteer-html5 puppeteer-html5:latest \
+#    --name puppeteer mconftec/puppeteer:html5 \
 #    node -e "`cat yourscript.js`"
 
 FROM node:8-slim
