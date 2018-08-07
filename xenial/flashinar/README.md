@@ -8,7 +8,7 @@ Installed in your machine:
 
 [juju](https://docs.jujucharms.com/2.3/en/reference-install)
 
-*if you want to build the (./utils/dockerfiles/puppeteer/)Dockerfile locally:*
+*if you want to build the (./utils/dockerfiles/puppeteer-flash/)Dockerfile locally:*
 
 [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu)
 
@@ -22,15 +22,15 @@ Credentials to:
 
 ### Locally with docker
 
-Use docker to pull or build puppeteer-flash
+Use docker to pull or build puppeteer with chrome
 ```shell
 cd utils/dockerfiles/puppeteer-flash
-docker build -t puppeteer-flash .
+docker build -t mconftec/puppeteer:flash .
 ```
 or
 ```shell
 sudo docker login
-sudo docker pull mconftec/puppeteer-flash:latest
+sudo docker pull mconftec/puppeteer:flash
 ```
 Copy the scripts to your local /tmp directory
 ```shell
@@ -61,14 +61,14 @@ deployed. Make sure to include your Docker Hub credentials at:
 ```shell
 sudo docker login ...
 ```
-and set the docker image to use: (currently using *mconftec/puppeteer-flash:latest*)
+and set the docker image to use: (currently using *mconftec/puppeteer:flash*)
 ```shell
 sudo docker pull ...
 ```
 Step by step instructions on using the charm:
 ```shell
 juju bootstrap aws
-juju set-model-constraints "instance-type=c3.4xlarge"
+juju set-model-constraints "instance-type=c4.4xlarge"
 juju deploy ./xenial/flashinar --series xenial
 ```
 Running the test scripts:
@@ -78,14 +78,18 @@ juju run "sudo /tmp/run" --all
 the *run* script accept arguments:
 ```
  -h host  server url         default: https://sip.dev.mconf.com
- -r room  room name          default: "Test Room"
  -b bots  number of bots     default: 1
- -w wait  time between bots  default: 10000 (10 seconds)
+ -w wait  time between bots  default: 15000 (15 seconds)
  -l life  bot life span      default: 60000 (60 seconds)
 ```
-Where 3 bots sharing camera at "Demo Meeting" with 10 seconds between bots be:
+Where 3 bots with 20 seconds between bots be:
 ```shell
-juju run "sudo /tmp/run -t cam -r \"Demo Meeting\" -b 3 -w 10000" --all
+juju run "sudo /tmp/run -b 3 -w 20000" --all
+```
+Juju uses as default a 5 minutes timeout to the _run_ command. Some tests may
+last more than that so be sure to set a bigger timeout in those cases
+```shell
+juju run "sudo /tmp/run -b 100 -w 20000" --timeout 30m0s --all
 ```
 
 #### Scale out usage

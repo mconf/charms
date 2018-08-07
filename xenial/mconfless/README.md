@@ -18,7 +18,7 @@ Installed in your machine:
 
 [juju](https://docs.jujucharms.com/2.3/en/reference-install)
 
-*if you want to build the (./utils/dockerfiles/puppeteer/)Dockerfile locally:*
+*if you want to build the (./utils/dockerfiles/puppeteer-html5/)Dockerfile locally:*
 
 [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu)
 
@@ -35,12 +35,12 @@ Credentials to:
 Use docker to pull or build puppeteer with headless-chrome
 ```shell
 cd utils/dockerfiles/puppeteer
-docker build -t mconftec/puppeteer:firsttry .
+docker build -t mconftec/puppeteer:html5 .
 ```
 or
 ```shell
 sudo docker login
-sudo docker pull mconftec/puppeteer:firsttry
+sudo docker pull mconftec/puppeteer:html5
 ```
 Copy the scripts to your local /tmp directory
 ```shell
@@ -72,14 +72,14 @@ deployed. Make sure to include your Docker Hub credentials at:
 ```shell
 sudo docker login ...
 ```
-and set the docker image to use: (currently using *mconftec/puppeteer:firsttry*)
+and set the docker image to use: (currently using *mconftec/puppeteer:html5*)
 ```shell
 sudo docker pull ...
 ```
 Step by step instructions on using the charm:
 ```shell
 juju bootstrap aws
-juju set-model-constraints "instance-type=c3.4xlarge"
+juju set-model-constraints "instance-type=c4.4xlarge"
 juju deploy ./xenial/mconfless --series xenial
 ```
 Running the test scripts:
@@ -98,6 +98,11 @@ the *run* script accept arguments:
 Where 3 bots sharing camera at "Demo Meeting" with 10 seconds between bots be:
 ```shell
 juju run "sudo /tmp/run -t cam -r \"Demo Meeting\" -b 3 -w 10000" --all
+```
+Juju uses as default a 5 minutes timeout to the _run_ command. Some tests may
+last more than that so be sure to set a bigger timeout in those cases, e.g.:
+```shell
+juju run "sudo /tmp/run -b 100 -w 20000" --timeout 30m0s --all
 ```
 
 ##### Scale out usage
