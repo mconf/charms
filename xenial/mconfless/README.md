@@ -79,7 +79,7 @@ sudo docker pull ...
 Step by step instructions on using the charm:
 ```shell
 juju bootstrap aws
-juju set-model-constraints "instance-type=c4.4xlarge"
+juju set-model-constraints "instance-type=c3.4xlarge"
 juju deploy ./xenial/mconfless --series xenial
 ```
 Running the test scripts:
