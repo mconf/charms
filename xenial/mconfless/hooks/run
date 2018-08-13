@@ -56,7 +56,7 @@ case $t in
     ;;
   cam)
     echo "Test: video"
-    cp -rf /tmp/scripts/video.js /tmp/script.js
+    cp -rf /tmp/scripts/video-pool.js /tmp/script.js
     ;;
   all)
     echo "Test: audio and video"

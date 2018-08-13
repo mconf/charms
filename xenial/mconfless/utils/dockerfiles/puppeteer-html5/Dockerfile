@@ -36,6 +36,9 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 # Install puppeteer so it's available in the container.
 RUN npm i puppeteer
 
+# Install generic-pool so we can launch multiple puppeteers in the same server.
+RUN npm i generic-pool
+
 # Add user so we don't need --no-sandbox.
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads
