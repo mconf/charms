@@ -81,4 +81,4 @@ sed -e "s,LIFE,$l,g" -i /tmp/script.js
 echo "Life: $l"
 
 echo "Running Docker..."
-sudo docker run -i --rm -v /tmp:/tmp --cap-add=SYS_ADMIN mconftec/puppeteer:html5 node /tmp/script.js
+sudo docker run -i --rm -v /tmp:/tmp --cap-add=SYS_ADMIN mconf/puppeteer:html5 node /tmp/script.js

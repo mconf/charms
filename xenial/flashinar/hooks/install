@@ -20,7 +20,7 @@ sudo apt-get update
 sudo apt-get -y install docker-engine
 
 sudo docker login -u DOCKER_USERNAME -p DOCKER_PASSWORD
-sudo docker pull mconftec/puppeteer:flash
+sudo docker pull mconf/puppeteer:flash
 
 # Copying run script
 cp hooks/run /tmp

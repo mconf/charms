@@ -1,9 +1,9 @@
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
 # Build the container:
-# docker build -t mconftec/puppeteer:flash .
+# docker build -t mconf/puppeteer:flash .
 # Run the container by passing node -e "<yourscript.js content as a string> as the command:
 #  docker run -i --rm --cap-add=SYS_ADMIN \
-#    --name puppeteer mconftec/puppeteer:flash \
+#    --name puppeteer mconf/puppeteer:flash \
 #    xvfb-run node -e "`cat yourscript.js`"
 
 FROM node:8-slim

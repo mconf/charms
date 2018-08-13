@@ -14,7 +14,7 @@ Installed in your machine:
 
 Credentials to:
 
-[Mconftec at docker-hub](https://hub.docker.com/r/mconftec)
+[Mconf at docker-hub](https://hub.docker.com/r/mconf)
 
 [aws](https://docs.jujucharms.com/2.3/en/help-aws)
 
@@ -25,12 +25,12 @@ Credentials to:
 Use docker to pull or build puppeteer with chrome
 ```shell
 cd utils/dockerfiles/puppeteer-flash
-docker build -t mconftec/puppeteer:flash .
+docker build -t mconf/puppeteer:flash .
 ```
 or
 ```shell
 sudo docker login
-sudo docker pull mconftec/puppeteer:flash
+sudo docker pull mconf/puppeteer:flash
 ```
 Copy the scripts to your local /tmp directory
 ```shell
@@ -61,7 +61,7 @@ deployed. Make sure to include your Docker Hub credentials at:
 ```shell
 sudo docker login ...
 ```
-and set the docker image to use: (currently using *mconftec/puppeteer:flash*)
+and set the docker image to use: (currently using *mconf/puppeteer:flash*)
 ```shell
 sudo docker pull ...
 ```

@@ -30,7 +30,7 @@ sudo apt-get -y install docker-engine
 #  sudo systemctl start docker
 
 sudo docker login -u DOCKER_USERNAME -p DOCKER_PASSWORD
-sudo docker pull mconftec/puppeteer:html5
+sudo docker pull mconf/puppeteer:html5
 
 # Copying run script
 cp hooks/run /tmp

@@ -24,7 +24,7 @@ Installed in your machine:
 
 Credentials to:
 
-[Mconftec at docker-hub](https://hub.docker.com/r/mconftec/puppeteer)
+[Mconf at docker-hub](https://hub.docker.com/r/mconf/puppeteer)
 
 [aws](https://docs.jujucharms.com/2.3/en/help-aws)
 
@@ -35,12 +35,12 @@ Credentials to:
 Use docker to pull or build puppeteer with headless-chrome
 ```shell
 cd utils/dockerfiles/puppeteer
-docker build -t mconftec/puppeteer:html5 .
+docker build -t mconf/puppeteer:html5 .
 ```
 or
 ```shell
 sudo docker login
-sudo docker pull mconftec/puppeteer:html5
+sudo docker pull mconf/puppeteer:html5
 ```
 Copy the scripts to your local /tmp directory
 ```shell
@@ -72,7 +72,7 @@ deployed. Make sure to include your Docker Hub credentials at:
 ```shell
 sudo docker login ...
 ```
-and set the docker image to use: (currently using *mconftec/puppeteer:html5*)
+and set the docker image to use: (currently using *mconf/puppeteer:html5*)
 ```shell
 sudo docker pull ...
 ```
