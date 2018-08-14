@@ -4,6 +4,7 @@ const puppeteer = require('puppeteer');
 const selectorTimeout = 60000 // 60 seconds
 const reliefTimeout = 2000 // 2 seconds
 const botsPerBrowser = 2
+const numberOfBrowsers = Math.ceil(BOTS / botsPerBrowser)
 const url = HOST + '/demo/demoHTML5.jsp?action=create' +
     '&username=Boty+McBotface' +
     '&meetingname=' + encodeURI(ROOM)
@@ -34,7 +35,7 @@ async function click(page, element) {
 
   const browserPool = genericPool.createPool(factory, { max: 10, min: 1 })
 
-  for (let i = 0; i < Math.ceil(BOTS / botsPerBrowser); i++) {
+  for (let i = 0; i < numberOfBrowsers; i++) {
     browserPool.acquire().then(async browser => {
       console.log('Spawning browser', i)
       let promises = []
@@ -57,6 +58,6 @@ async function click(page, element) {
         await browser.close()
       })
     })
-    await delay(WAIT * (botsPerBrowser + 1))
+    await delay(WAIT * botsPerBrowser)
   }
 })()
