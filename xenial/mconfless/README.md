@@ -5,12 +5,13 @@ Puppeteer.
 
 ## Load testing
 
-Join bot users in a meeting that can:
+Bot users in a meeting that can:
 
+  - listen audio
   - share audio
   - share video
   - share both audio and video
-  - or simply as listeners
+  - or simply join a meeting
 
 ### Requisites
 
@@ -53,7 +54,7 @@ sudo ./run
 ```
 the *run* script accept arguments:
 ```
- -t test  <mic|cam|all>      default: listen-only
+ -t test  <lis|mic|cam|all>  default: join
  -h host  server url         default: https://html5.dev.mconf.com
  -r room  room name          default: "Test Room"
  -b bots  number of bots     default: 1
@@ -88,7 +89,7 @@ juju run "sudo /tmp/run" --all
 ```
 the *run* script accept arguments:
 ```
- -t test  <mic|cam|all>      default: listen-only
+ -t test  <lis|mic|cam|all>  default: join
  -h host  server url         default: https://html5.dev.mconf.com
  -r room  room name          default: "Test Room"
  -b bots  number of bots     default: 1
