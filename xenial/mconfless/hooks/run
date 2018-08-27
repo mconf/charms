@@ -11,7 +11,13 @@ l=60000
 
 usage() {
   echo "Usage: $0"
-  echo "  -t test  <lis|mic|cam|all>  default: join"
+  echo "  -t test"
+  echo "           lis"
+  echo "           mic"
+  echo "           cam"
+  echo "           all"
+  echo "           msg"
+  echo "  default: join"
   echo "  -h host  server url         default: https://html5.dev.mconf.com"
   echo "  -r room  room name          default: \"Test Room\""
   echo "  -b bots  number of bots     default: 1"
@@ -25,7 +31,7 @@ while getopts ":t:h:r:b:w:l:" o; do
   case "${o}" in
     t)
       t=${OPTARG}
-      ((t == "lis" || t == "mic" || t == "cam" || t == "all")) || usage
+      ((t == "lis" || t == "mic" || t == "cam" || t == "msg" || t == "all")) || usage
       ;;
     h)
       h=${OPTARG}
@@ -65,6 +71,10 @@ case $t in
   all)
     echo "Test: audio and video"
     cp -rf /tmp/scripts/audio-and-video.js /tmp/script.js
+    ;;
+  msg)
+    echo "Test: chat"
+    cp -rf /tmp/scripts/chat.js /tmp/script.js
     ;;
   *)
     echo "Test: join"
