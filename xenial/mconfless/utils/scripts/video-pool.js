@@ -1,30 +1,33 @@
-const genericPool = require('generic-pool');
-const puppeteer = require('puppeteer');
+/**
+ * @name Video
+ *
+ * @desc Join video bots in a meeting
+ */
 
-const selectorTimeout = 60000 // 60 seconds
-const reliefTimeout = 2000 // 2 seconds
-const botsPerBrowser = 2
-const numberOfBrowsers = Math.ceil(BOTS / botsPerBrowser)
-const url = HOST + '/demo/demoHTML5.jsp?action=create' +
-    '&username=Boty+McBotface' +
-    '&meetingname=' + encodeURI(ROOM)
-const delay = ms => { return new Promise(resolve => setTimeout(resolve, ms)) }
+const genericPool = require('generic-pool')
+const puppeteer = require('puppeteer')
+const utils = require('./scripts/utils.js')
+const config = require('./scripts/config/config.json')
 
-async function click(page, element) {
-  await page.waitForSelector(element, { timeout: selectorTimeout })
-  await page.click(element)
-}
+const pool = config.browser.pool
+const audio = config.element.audio
+const video = config.element.video
+const url = HOST + config.demo.html.url +
+    config.demo.html.user + 'Boty+McBotface' +
+    config.demo.html.meeting + encodeURI(ROOM)
+const poolSize = Math.ceil(BOTS / pool.population)
 
-(async () => {
+let run = async () => {
   const factory = {
     create: async () => {
       return await puppeteer.launch({
-        executablePath: 'google-chrome-unstable',
+        executablePath: config.browser.path,
+        headless: config.browser.headless,
         args: [
           '--disable-dev-shm-usage',
           '--use-fake-ui-for-media-stream',
           '--use-fake-device-for-media-stream',
-          '--use-file-for-fake-video-capture=/home/pptruser/alternative-video.y4m'
+          config.browser.media.video
         ]
       })
     },
@@ -33,24 +36,24 @@ async function click(page, element) {
     },
   }
 
-  const browserPool = genericPool.createPool(factory, { max: 10, min: 1 })
+  const browserPool = genericPool.createPool(factory, { max: pool.size.max, min: pool.size.min })
 
-  for (let i = 0; i < numberOfBrowsers; i++) {
+  for (let i = 0; i < poolSize; i++) {
     browserPool.acquire().then(async browser => {
       console.log('Spawning browser', i)
       let promises = []
-      for (let j = 0; j < botsPerBrowser; j++) {
-        await delay(WAIT)
+      for (let j = 0; j < pool.population; j++) {
+        await utils.delay(WAIT)
         promises.push(browser.newPage().then(async page => {
-          console.log('Spawning bot', (i * botsPerBrowser) + j)
+          console.log('Spawning bot', (i * pool.population) + j)
           await page.goto(url)
-          await click(page, '[aria-label="Close"]')
-          await page.waitFor(reliefTimeout)
-          await click(page, '[aria-label="Open video menu dropdown"]')
-          await click(page, 'img[src="/html5client/resources/images/video-menu/icon-webcam-off.svg"]')
+          await utils.click(page, audio.dialog.close)
+          await page.waitFor(config.timeout.relief)
+          await utils.click(page, video.open)
+          await utils.click(page, video.menu.share)
           await page.waitFor(LIFE)
         }).catch(error => {
-          console.warn('Execution error caught with bot', (i * botsPerBrowser) + j)
+          console.warn('Execution error caught with bot', (i * pool.population) + j)
           return error
         }))
       }
@@ -58,6 +61,8 @@ async function click(page, element) {
         await browser.close()
       })
     })
-    await delay(WAIT * botsPerBrowser)
+    await utils.delay(WAIT * pool.population)
   }
-})()
+}
+
+run()

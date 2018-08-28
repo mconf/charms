@@ -5,35 +5,33 @@
  */
 
 const puppeteer = require('puppeteer')
-const selectorTimeout = 60000 // 60 seconds
-const url = HOST + '/demo/demoHTML5.jsp?action=create' +
-    '&username=Boty+McBotface' +
-    '&meetingname=' + encodeURI(ROOM)
-const delay = ms => { return new Promise(resolve => setTimeout(resolve, ms)) }
+const utils = require('./scripts/utils.js')
+const config = require('./scripts/config/config.json')
 
-async function click(page, element) {
-  await page.waitForSelector(element, { timeout: selectorTimeout })
-  await page.click(element)
-}
+const audio = config.element.audio
+const url = HOST + config.demo.html.url +
+    config.demo.html.user + 'Boty+McBotface' +
+    config.demo.html.meeting + encodeURI(ROOM)
 
-(async () => {
+let run = async () => {
   puppeteer.launch({
-    executablePath: 'google-chrome-unstable',
+    executablePath: config.browser.path,
+    headless: config.browser.headless,
     args: [
       '--disable-dev-shm-usage',
       '--use-fake-ui-for-media-stream',
       '--use-fake-device-for-media-stream',
-      '--use-file-for-fake-audio-capture=/home/pptruser/alternative-audio.wav'
+      config.browser.media.audio
     ]
   }).then(async browser => {
     const promises = []
     for (let i = 0; i < BOTS; i++) {
-      await delay(WAIT)
+      await utils.delay(WAIT)
       promises.push(browser.newPage().then(async page => {
         console.log('Spawning bot', i)
         await page.goto(url)
-        await click(page, '[aria-label="Microphone"]')
-        await click(page, '[aria-label="Echo is audible"]')
+        await utils.click(page, audio.dialog.microphone)
+        await utils.click(page, audio.echo.confirm)
         await page.waitFor(LIFE)
       }).catch(error => {
         console.warn('Execution error caught with bot', i)
@@ -44,4 +42,6 @@ async function click(page, element) {
       await browser.close()
     })
   })
-})()
+}
+
+run()

@@ -1,0 +1,62 @@
+{
+  "timeout": {
+    "selector": 60000,
+    "relief": 2000,
+    "input": 500
+  },
+  "element": {
+    "audio": {
+      "dialog": {
+        "microphone": "[aria-label=\"Microphone\"]",
+        "listenOnly": "[aria-label=\"Listen Only\"]",
+        "close": "[aria-label=\"Close\"]"
+      },
+      "echo": {
+        "confirm": "[aria-label=\"Echo is audible\"]"
+      }
+    },
+    "video": {
+      "open": "[aria-label=\"Open video menu dropdown\"]",
+      "menu": {
+        "share": "img[src=\"/html5client/resources/images/video-menu/icon-webcam-off.svg\"]"
+      }
+    },
+    "chat": {
+      "open": "a[href=\"/html5client/users/chat/public\"]",
+      "form": {
+        "input": "#message-input",
+        "send": "[aria-label=\"Send Message\"]"
+      }
+    }
+  },
+  "chat": {
+    "messages": [
+      "Siga em frente...",
+      "... olhe para o lado",
+      "Se liga no mestiço...",
+      "... na batida do cavaco"
+    ]
+  },
+  "browser": {
+    "path": "google-chrome-unstable",
+    "headless": true,
+    "media": {
+      "audio": "--use-file-for-fake-audio-capture=/home/pptruser/alternative-audio.wav",
+      "video": "--use-file-for-fake-video-capture=/home/pptruser/alternative-video.y4m"
+    },
+    "pool": {
+      "population": 2,
+      "size": {
+        "min": 1,
+        "max": 10
+      }
+    }
+  },
+  "demo": {
+    "html": {
+      "url": "/demo/demoHTML5.jsp?action=create",
+      "user": "&username=",
+      "meeting": "&meetingname="
+    }
+  }
+}

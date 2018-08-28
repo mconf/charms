@@ -5,21 +5,24 @@
  */
 
 const puppeteer = require('puppeteer')
-const url = HOST + '/demo/demoHTML5.jsp?action=create' +
-    '&username=Boty+McBotface' +
-    '&meetingname=' + encodeURI(ROOM)
-const delay = ms => { return new Promise(resolve => setTimeout(resolve, ms)) }
+const utils = require('./scripts/utils.js')
+const config = require('./scripts/config/config.json')
 
-(async () => {
+const url = HOST + config.demo.html.url +
+    config.demo.html.user + 'Boty+McBotface' +
+    config.demo.html.meeting + encodeURI(ROOM)
+
+let run = async () => {
   puppeteer.launch({
-    executablePath: 'google-chrome-unstable',
+    executablePath: config.browser.path,
+    headless: config.browser.headless,
     args: [
       '--disable-dev-shm-usage'
     ]
   }).then(async browser => {
     const promises = []
     for (let i = 0; i < BOTS; i++) {
-      await delay(WAIT)
+      await utils.delay(WAIT)
       promises.push(browser.newPage().then(async page => {
         console.log('Spawning bot', i)
         await page.goto(url)
@@ -33,4 +36,6 @@ const delay = ms => { return new Promise(resolve => setTimeout(resolve, ms)) }
       await browser.close()
     })
   })
-})()
+}
+
+run()

@@ -1,42 +1,40 @@
 /**
  * @name Video
- *
+ * @deprecated Use video-pool
  * @desc Join video bots in a meeting
  */
 
 const puppeteer = require('puppeteer')
-const selectorTimeout = 60000 // 60 seconds
-const reliefTimeout = 2000 // 2 seconds
-const url = HOST + '/demo/demoHTML5.jsp?action=create' +
-    '&username=Boty+McBotface' +
-    '&meetingname=' + encodeURI(ROOM)
-const delay = ms => { return new Promise(resolve => setTimeout(resolve, ms)) }
+const utils = require('./scripts/utils.js')
+const config = require('./scripts/config/config.json')
 
-async function click(page, element) {
-  await page.waitForSelector(element, { timeout: selectorTimeout })
-  await page.click(element)
-}
+const audio = config.element.audio
+const video = config.element.video
+const url = HOST + config.demo.html.url +
+    config.demo.html.user + 'Boty+McBotface' +
+    config.demo.html.meeting + encodeURI(ROOM)
 
-(async () => {
+let run = async () => {
   puppeteer.launch({
-    executablePath: 'google-chrome-unstable',
+    executablePath: config.browser.path,
+    headless: config.browser.headless,
     args: [
       '--disable-dev-shm-usage',
       '--use-fake-ui-for-media-stream',
       '--use-fake-device-for-media-stream',
-      '--use-file-for-fake-video-capture=/home/pptruser/alternative-video.y4m'
+      config.browser.media.video
     ]
   }).then(async browser => {
     const promises = []
     for (let i = 0; i < BOTS; i++) {
-      await delay(WAIT)
+      await utils.delay(WAIT)
       promises.push(browser.newPage().then(async page => {
         console.log('Spawning bot', i)
         await page.goto(url)
-        await click(page, '[aria-label="Close"]')
-        await page.waitFor(reliefTimeout)
-        await click(page, '[aria-label="Open video menu dropdown"]')
-        await click(page, 'img[src="/html5client/resources/images/video-menu/icon-webcam-off.svg"]')
+        await utils.click(page, audio.dialog.close)
+        await page.waitFor(config.timeout.relief)
+        await utils.click(page, video.open)
+        await utils.click(page, video.menu.share)
         await page.waitFor(LIFE)
       }).catch(error => {
         console.warn('Execution error caught with bot', i)
@@ -47,4 +45,6 @@ async function click(page, element) {
       await browser.close()
     })
   })
-})()
+}
+
+run()
