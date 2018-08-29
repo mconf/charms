@@ -54,45 +54,47 @@ while getopts ":t:h:r:b:w:l:" o; do
   esac
 done
 
-echo "Copying test script..."
-case $t in
-  lis)
-    echo "Test: listen only"
-    cp -rf /tmp/scripts/listen-only.js /tmp/script.js
-    ;;
-  mic)
-    echo "Test: audio"
-    cp -rf /tmp/scripts/audio.js /tmp/script.js
-    ;;
-  cam)
-    echo "Test: video"
-    cp -rf /tmp/scripts/video-pool.js /tmp/script.js
-    ;;
-  all)
-    echo "Test: audio and video"
-    cp -rf /tmp/scripts/audio-and-video.js /tmp/script.js
-    ;;
-  msg)
-    echo "Test: chat"
-    cp -rf /tmp/scripts/chat.js /tmp/script.js
-    ;;
-  *)
-    echo "Test: join"
-    cp -rf /tmp/scripts/join.js /tmp/script.js
-    ;;
-esac
+echo "Copying config file..."
+cp -rf /tmp/scripts/config/config.json.template /tmp/scripts/config/config.json
 
 echo "Setting test variables..."
-sed -e "s,HOST,\"$h\",g" -i /tmp/script.js
+sed -e "s,HOST,\"$h\",g" -i /tmp/scripts/config/config.json
 echo "Host: $h"
-sed -e "s,ROOM,\"$r\",g" -i /tmp/script.js
+sed -e "s,ROOM,\"$r\",g" -i /tmp/scripts/config/config.json
 echo "Room: $r"
-sed -e "s,BOTS,$b,g" -i /tmp/script.js
+sed -e "s,BOTS,$b,g" -i /tmp/scripts/config/config.json
 echo "Bots: $b"
-sed -e "s,WAIT,$w,g" -i /tmp/script.js
+sed -e "s,WAIT,$w,g" -i /tmp/scripts/config/config.json
 echo "Wait: $w"
-sed -e "s,LIFE,$l,g" -i /tmp/script.js
+sed -e "s,LIFE,$l,g" -i /tmp/scripts/config/config.json
 echo "Life: $l"
 
+DOCKER_CMD="sudo docker run -i --rm -v /tmp:/tmp --cap-add=SYS_ADMIN mconf/puppeteer:html5 node"
+
 echo "Running Docker..."
-sudo docker run -i --rm -v /tmp:/tmp --cap-add=SYS_ADMIN mconf/puppeteer:html5 node /tmp/script.js
+case $t in
+  lis)
+    echo "Starting listen only test"
+    $DOCKER_CMD /tmp/scripts/listen-only.js
+    ;;
+  mic)
+    echo "Starting audio test"
+    $DOCKER_CMD /tmp/scripts/audio.js
+    ;;
+  cam)
+    echo "Starting video test"
+    $DOCKER_CMD /tmp/scripts/video.js
+    ;;
+  all)
+    echo "Starting audio and video test"
+    $DOCKER_CMD /tmp/scripts/audio-and-video.js
+    ;;
+  msg)
+    echo "Starting chat test"
+    $DOCKER_CMD /tmp/scripts/chat.js
+    ;;
+  *)
+    echo "Starting join test"
+    $DOCKER_CMD /tmp/scripts/join.js
+    ;;
+esac

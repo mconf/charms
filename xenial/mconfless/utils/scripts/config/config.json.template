@@ -52,11 +52,17 @@
       }
     }
   },
-  "demo": {
-    "html": {
-      "url": "/demo/demoHTML5.jsp?action=create",
-      "user": "&username=",
-      "meeting": "&meetingname="
-    }
+  "bot": {
+    "population": BOTS,
+    "wait": WAIT,
+    "lifespan": LIFE
+  },
+  "url": {
+    "host": HOST,
+    "demo": "/demo/demoHTML5.jsp?action=create",
+    "userTag": "&username=",
+    "user": "Boty McBotface",
+    "meetingTag": "&meetingname=",
+    "meeting": ROOM
   }
 }

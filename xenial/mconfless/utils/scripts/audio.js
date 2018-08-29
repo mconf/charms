@@ -5,13 +5,11 @@
  */
 
 const puppeteer = require('puppeteer')
-const utils = require('./scripts/utils.js')
-const config = require('./scripts/config/config.json')
+const utils = require('./utils.js')
+const config = require('./config/config.json')
 
+const bot = config.bot
 const audio = config.element.audio
-const url = HOST + config.demo.html.url +
-    config.demo.html.user + 'Boty+McBotface' +
-    config.demo.html.meeting + encodeURI(ROOM)
 
 let run = async () => {
   puppeteer.launch({
@@ -25,14 +23,14 @@ let run = async () => {
     ]
   }).then(async browser => {
     const promises = []
-    for (let i = 0; i < BOTS; i++) {
-      await utils.delay(WAIT)
+    for (let i = 0; i < bot.population; i++) {
+      await utils.delay(bot.wait)
       promises.push(browser.newPage().then(async page => {
         console.log('Spawning bot', i)
-        await page.goto(url)
+        await page.goto(utils.url)
         await utils.click(page, audio.dialog.microphone)
         await utils.click(page, audio.echo.confirm)
-        await page.waitFor(LIFE)
+        await page.waitFor(bot.lifespan)
       }).catch(error => {
         console.warn('Execution error caught with bot', i)
         return error
