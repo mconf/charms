@@ -49,6 +49,7 @@ let run = async () => {
           await utils.click(page, video.open, true)
           await utils.click(page, video.menu.share)
           await page.waitFor(bot.lifespan)
+          await utils.screenshot(page)
         }).catch(error => {
           console.warn('Execution error caught with bot', (i * pool.population) + j)
           return error

@@ -58,6 +58,10 @@
     "audio": "/home/pptruser/alternative-audio.wav",
     "video": "/home/pptruser/alternative-video.y4m"
   },
+  "screenshot": {
+    "enabled": false,
+    "path": "/tmp/"
+  },
   "timeout": {
     "selector": 60000,
     "relief": 1000

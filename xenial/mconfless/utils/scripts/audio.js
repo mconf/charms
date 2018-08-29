@@ -31,6 +31,7 @@ let run = async () => {
         await utils.click(page, audio.dialog.microphone)
         await utils.click(page, audio.echo.confirm)
         await page.waitFor(bot.lifespan)
+        await utils.screenshot(page)
       }).catch(error => {
         console.warn('Execution error caught with bot', i)
         return error

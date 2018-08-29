@@ -34,6 +34,7 @@ let run = async () => {
           await utils.type(page, chat.form.input, messages[j % messages.length], true)
           await utils.click(page, chat.form.send)
         }
+        await utils.screenshot(page)
       }).catch(error => {
         console.warn('Execution error caught with bot', i)
         return error

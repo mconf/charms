@@ -25,6 +25,7 @@ let run = async () => {
         console.log('Spawning bot', i)
         await page.goto(utils.url)
         await page.waitFor(bot.lifespan)
+        await utils.screenshot(page)
       }).catch(error => {
         console.warn('Execution error caught with bot', i)
         return error
