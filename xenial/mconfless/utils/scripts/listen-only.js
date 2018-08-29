@@ -8,7 +8,7 @@ const puppeteer = require('puppeteer')
 const utils = require('./utils.js')
 const config = require('./config/config.json')
 
-const audio = config.element.audio
+const audio = config.ui.audio
 const bot = config.bot
 
 let run = async () => {

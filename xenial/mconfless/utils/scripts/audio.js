@@ -9,7 +9,7 @@ const utils = require('./utils.js')
 const config = require('./config/config.json')
 
 const bot = config.bot
-const audio = config.element.audio
+const audio = config.ui.audio
 
 let run = async () => {
   puppeteer.launch({
@@ -19,7 +19,7 @@ let run = async () => {
       '--disable-dev-shm-usage',
       '--use-fake-ui-for-media-stream',
       '--use-fake-device-for-media-stream',
-      config.browser.media.audio
+      '--use-file-for-fake-audio-capture=' + config.data.audio
     ]
   }).then(async browser => {
     const promises = []

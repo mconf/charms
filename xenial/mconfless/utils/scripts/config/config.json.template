@@ -1,10 +1,29 @@
 {
-  "timeout": {
-    "selector": 60000,
-    "relief": 2000,
-    "input": 500
+  "url": {
+    "host": HOST,
+    "demo": "/demo/demoHTML5.jsp?action=create",
+    "userTag": "&username=",
+    "user": "Boty McBotface",
+    "meetingTag": "&meetingname=",
+    "meeting": ROOM
   },
-  "element": {
+  "bot": {
+    "population": BOTS,
+    "wait": WAIT,
+    "lifespan": LIFE
+  },
+  "browser": {
+    "path": "google-chrome-unstable",
+    "headless": true,
+    "pool": {
+      "population": 2,
+      "size": {
+        "min": 1,
+        "max": 10
+      }
+    }
+  },
+  "ui": {
     "audio": {
       "dialog": {
         "microphone": "[aria-label=\"Microphone\"]",
@@ -29,40 +48,19 @@
       }
     }
   },
-  "chat": {
-    "messages": [
+  "data": {
+    "chat": [
       "Siga em frente...",
       "... olhe para o lado",
       "Se liga no mestiço...",
       "... na batida do cavaco"
-    ]
+    ],
+    "audio": "/home/pptruser/alternative-audio.wav",
+    "video": "/home/pptruser/alternative-video.y4m"
   },
-  "browser": {
-    "path": "google-chrome-unstable",
-    "headless": true,
-    "media": {
-      "audio": "--use-file-for-fake-audio-capture=/home/pptruser/alternative-audio.wav",
-      "video": "--use-file-for-fake-video-capture=/home/pptruser/alternative-video.y4m"
-    },
-    "pool": {
-      "population": 2,
-      "size": {
-        "min": 1,
-        "max": 10
-      }
-    }
-  },
-  "bot": {
-    "population": BOTS,
-    "wait": WAIT,
-    "lifespan": LIFE
-  },
-  "url": {
-    "host": HOST,
-    "demo": "/demo/demoHTML5.jsp?action=create",
-    "userTag": "&username=",
-    "user": "Boty McBotface",
-    "meetingTag": "&meetingname=",
-    "meeting": ROOM
+  "timeout": {
+    "selector": 60000,
+    "relief": 2000,
+    "input": 500
   }
 }

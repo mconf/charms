@@ -9,8 +9,8 @@ const utils =  require('./utils.js')
 const config = require('./config/config.json')
 
 const bot = config.bot
-const chat = config.element.chat
-const audio = config.element.audio
+const chat = config.ui.chat
+const audio = config.ui.audio
 const messages = config.chat.messages
 const chatSize = Math.round(bot.lifespan / config.timeout.input)
 

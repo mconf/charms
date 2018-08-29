@@ -11,8 +11,8 @@ const config = require('./config/config.json')
 
 const pool = config.browser.pool
 const bot = config.bot
-const audio = config.element.audio
-const video = config.element.video
+const audio = config.ui.audio
+const video = config.ui.video
 const poolSize = Math.ceil(bot.population / pool.population)
 
 let run = async () => {
@@ -25,7 +25,7 @@ let run = async () => {
           '--disable-dev-shm-usage',
           '--use-fake-ui-for-media-stream',
           '--use-fake-device-for-media-stream',
-          config.browser.media.video
+          '--use-file-for-fake-video-capture=' + config.data.video
         ]
       })
     },
