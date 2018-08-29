@@ -48,8 +48,7 @@ let run = async () => {
           await page.goto(utils.url)
           await utils.click(page, audio.dialog.microphone)
           await utils.click(page, audio.echo.confirm)
-          await page.waitFor(config.timeout.relief)
-          await utils.click(page, video.open)
+          await utils.click(page, video.open, true)
           await utils.click(page, video.menu.share)
           await page.waitFor(bot.lifespan)
         }).catch(error => {

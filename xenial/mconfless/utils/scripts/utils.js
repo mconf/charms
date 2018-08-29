@@ -14,12 +14,13 @@ module.exports = {
   delay: async function(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
   },
-  click: async function(page, element) {
+  click: async function(page, element, relief = false) {
+    if (relief) await this.delay(timeout.relief)
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.click(element)
   },
-  type: async function(page, element, text) {
-    await this.delay(timeout.input)
+  type: async function(page, element, text, relief = false) {
+    if (relief) await this.delay(timeout.relief)
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.type(element, text)
   }

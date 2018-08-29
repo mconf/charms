@@ -60,7 +60,6 @@
   },
   "timeout": {
     "selector": 60000,
-    "relief": 2000,
-    "input": 500
+    "relief": 1000
   }
 }

@@ -11,8 +11,8 @@ const config = require('./config/config.json')
 const bot = config.bot
 const chat = config.ui.chat
 const audio = config.ui.audio
-const messages = config.chat.messages
-const chatSize = Math.round(bot.lifespan / config.timeout.input)
+const messages = config.data.chat
+const chatSize = Math.round(bot.lifespan / config.timeout.relief)
 
 let run = async () => {
   puppeteer.launch({
@@ -29,10 +29,9 @@ let run = async () => {
         console.log('Spawning bot', i)
         await page.goto(utils.url)
         await utils.click(page, audio.dialog.close)
-        await page.waitFor(config.timeout.relief)
-        await utils.click(page, chat.open)
+        await utils.click(page, chat.open, true)
         for (let j = 0; j < chatSize; j++) {
-          await utils.type(page, chat.form.input,  messages[j % messages.length])
+          await utils.type(page, chat.form.input, messages[j % messages.length], true)
           await utils.click(page, chat.form.send)
         }
       }).catch(error => {

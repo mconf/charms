@@ -46,8 +46,7 @@ let run = async () => {
           console.log('Spawning bot', (i * pool.population) + j)
           await page.goto(utils.url)
           await utils.click(page, audio.dialog.close)
-          await page.waitFor(config.timeout.relief)
-          await utils.click(page, video.open)
+          await utils.click(page, video.open, true)
           await utils.click(page, video.menu.share)
           await page.waitFor(bot.lifespan)
         }).catch(error => {
