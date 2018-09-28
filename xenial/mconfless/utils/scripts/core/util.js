@@ -1,11 +1,12 @@
 /**
- * @name Utils
+ * @name Util
  *
  * @desc Collection of common functions
  */
 
-const config = require('./config/config.json')
+const conf = require('./conf.js')
 
+const config = conf.config
 const timeout = config.timeout
 const url = config.url
 

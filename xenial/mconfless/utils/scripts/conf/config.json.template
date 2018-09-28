@@ -23,31 +23,6 @@
       }
     }
   },
-  "ui": {
-    "audio": {
-      "dialog": {
-        "microphone": "[aria-label=\"Microphone\"]",
-        "listenOnly": "[aria-label=\"Listen Only\"]",
-        "close": "[aria-label=\"Close\"]"
-      },
-      "echo": {
-        "confirm": "[aria-label=\"Echo is audible\"]"
-      }
-    },
-    "video": {
-      "open": "[aria-label=\"Open video menu dropdown\"]",
-      "menu": {
-        "share": "img[src=\"/html5client/resources/images/video-menu/icon-webcam-off.svg\"]"
-      }
-    },
-    "chat": {
-      "open": "a[href=\"/html5client/users/chat/public\"]",
-      "form": {
-        "input": "#message-input",
-        "send": "[aria-label=\"Send Message\"]"
-      }
-    }
-  },
   "data": {
     "chat": [
       "Siga em frente...",

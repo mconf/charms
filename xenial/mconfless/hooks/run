@@ -55,18 +55,18 @@ while getopts ":t:h:r:b:w:l:" o; do
 done
 
 echo "Copying config file..."
-cp -rf /tmp/scripts/config/config.json.template /tmp/scripts/config/config.json
+cp -rf /tmp/scripts/conf/config.json.template /tmp/scripts/conf/config.json
 
 echo "Setting test variables..."
-sed -e "s,HOST,\"$h\",g" -i /tmp/scripts/config/config.json
+sed -e "s,HOST,\"$h\",g" -i /tmp/scripts/conf/config.json
 echo "Host: $h"
-sed -e "s,ROOM,\"$r\",g" -i /tmp/scripts/config/config.json
+sed -e "s,ROOM,\"$r\",g" -i /tmp/scripts/conf/config.json
 echo "Room: $r"
-sed -e "s,BOTS,$b,g" -i /tmp/scripts/config/config.json
+sed -e "s,BOTS,$b,g" -i /tmp/scripts/conf/config.json
 echo "Bots: $b"
-sed -e "s,WAIT,$w,g" -i /tmp/scripts/config/config.json
+sed -e "s,WAIT,$w,g" -i /tmp/scripts/conf/config.json
 echo "Wait: $w"
-sed -e "s,LIFE,$l,g" -i /tmp/scripts/config/config.json
+sed -e "s,LIFE,$l,g" -i /tmp/scripts/conf/config.json
 echo "Life: $l"
 
 DOCKER_CMD="sudo docker run -i --rm -v /tmp:/tmp --cap-add=SYS_ADMIN mconf/puppeteer:html5 node"
