@@ -10,7 +10,7 @@ const conf = require('./conf.js')
 
 const bot = conf.config.bot
 
-const run = async (actions) => {
+const run = async actions => {
   for (let i = 0; i < pool.size; i++) {
     pool.browsers.acquire().then(async browser => {
       console.log('Spawning browser', i)

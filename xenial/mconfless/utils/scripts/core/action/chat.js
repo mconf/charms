@@ -11,17 +11,16 @@ const chat = conf.label.chat
 const data = conf.config.data
 
 module.exports = {
-  open: async function(page) {
-    await util.click(page, chat.open, true)
-  },
-  send: async function(page) {
+  open: async page => await util.click(page, chat.open, true),
+  close: async page => await util.click(page, chat.close),
+  send: async page => {
     let messages = data.chat
     for (let i = 0; i < messages.length; i++) {
       await util.type(page, chat.form.input, messages[i], true)
       await util.click(page, chat.form.send)
     }
   },
-  clear: async function(page) {},
-  copy: async function(page) {},
-  save: async function(page) {}
+  clear: async page => {},
+  copy: async page => {},
+  save: async page => {}
 }

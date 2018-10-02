@@ -10,12 +10,12 @@ const util = require('../util.js')
 const video = conf.label.video
 
 module.exports = {
-  join: async function(page) {
+  join: async page => {
     await util.click(page, video.open, true)
     await util.click(page, video.menu.share)
   },
-  leave: async function(page) {},
-  focus: async function(page) {},
-  stats: async function(page) {},
-  swap: async function(page) {}
+  leave: async page => {},
+  focus: async page => {},
+  stats: async page => {},
+  swap: async page => {}
 }

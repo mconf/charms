@@ -17,6 +17,7 @@
   },
   "chat": {
     "open": "a[href=\"/html5client/users/chat/public\"]",
+    "close": "[aria-label=\"Hide Public Chat\"]",
     "form": {
       "input": "#message-input",
       "send": "[aria-label=\"Send Message\"]"
