@@ -7,7 +7,11 @@
     },
     "echo": {
       "confirm": "[aria-label=\"Echo is audible\"]"
-    }
+    },
+    "join": "[aria-label=\"Join Audio\"]",
+    "mute": "[aria-label=\"Mute\"]",
+    "unmute": "[aria-label=\"Unmute\"]",
+    "leave": "[aria-label=\"Leave Audio\"]"
   },
   "video": {
     "open": "[aria-label=\"Open video menu dropdown\"]",
