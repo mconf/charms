@@ -17,6 +17,7 @@ usage() {
   echo "           cam"
   echo "           all"
   echo "           msg"
+  echo "           pad"
   echo "  default: join"
   echo "  -h host  server url         default: https://html5.dev.mconf.com"
   echo "  -r room  room name          default: \"Test Room\""
@@ -31,7 +32,7 @@ while getopts ":t:h:r:b:w:l:" o; do
   case "${o}" in
     t)
       t=${OPTARG}
-      ((t == "lis" || t == "mic" || t == "cam" || t == "msg" || t == "all")) || usage
+      ((t == "lis" || t == "mic" || t == "cam" || t == "msg" || t == "pad" || t == "all")) || usage
       ;;
     h)
       h=${OPTARG}
@@ -92,6 +93,10 @@ case $t in
   msg)
     echo "Starting chat test"
     $DOCKER_CMD /tmp/scripts/chat.js
+    ;;
+  pad)
+    echo "Starting note test"
+    $DOCKER_CMD /tmp/scripts/note.js
     ;;
   *)
     echo "Starting join test"

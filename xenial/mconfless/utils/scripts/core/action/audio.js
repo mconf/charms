@@ -15,7 +15,7 @@ module.exports = {
     await util.click(page, audio.dialog.microphone)
     await util.click(page, audio.echo.confirm)
   },
-  listen: async page => await util.click(page, audio.dialog.listenOnly),
+  listen: async page => await util.click(page, audio.dialog.listen),
   close: async page => await util.click(page, audio.dialog.close),
   mute: async page => await util.click(page, audio.mute, true),
   unmute: async page => await util.click(page, audio.unmute, true),

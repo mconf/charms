@@ -2,7 +2,7 @@
   "audio": {
     "dialog": {
       "microphone": "[aria-label=\"Microphone\"]",
-      "listenOnly": "[aria-label=\"Listen Only\"]",
+      "listen": "[aria-label=\"Listen Only\"]",
       "close": "[aria-label=\"Close\"]"
     },
     "echo": {
@@ -25,6 +25,14 @@
     "form": {
       "input": "#message-input",
       "send": "[aria-label=\"Send Message\"]"
+    }
+  },
+  "note": {
+    "open": "a[href=\"/html5client/users/notes\"]",
+    "close": "[aria-label=\"Hide Shared Notes\"]",
+    "iframe": {
+      "name": "ace_inner",
+      "pad": "html[dir=\"ltr\"]"
     }
   }
 }

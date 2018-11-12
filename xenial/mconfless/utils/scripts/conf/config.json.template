@@ -16,7 +16,7 @@
     "path": "google-chrome-unstable",
     "headless": true,
     "pool": {
-      "population": 2,
+      "population": 1,
       "size": {
         "min": 1,
         "max": 10
@@ -29,6 +29,12 @@
       "... olhe para o lado",
       "Se liga no mestiço...",
       "... na batida do cavaco"
+    ],
+    "note": [
+      "\nQuero ver o som de Bob Marley sacudindo o partideiro...",
+      "\nO reggae da Jamaica no embolada...",
+      "\nEu vou mostrar pro mundo inteiro...",
+      "\nMundo inteiro!"
     ],
     "audio": "/home/pptruser/alternative-audio.wav",
     "video": "/home/pptruser/alternative-video.y4m"

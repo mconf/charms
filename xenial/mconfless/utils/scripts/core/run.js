@@ -16,15 +16,16 @@ const run = async actions => {
       console.log('Spawning browser', i)
       let promises = []
       for (let j = 0; j < pool.population; j++) {
+        let id = (i * pool.population) + j
         await util.delay(bot.wait)
         promises.push(browser.newPage().then(async page => {
-          console.log('Spawning bot', (i * pool.population) + j)
+          console.log('Spawning bot', id)
           await page.goto(util.url)
           await actions(page)
           await page.waitFor(bot.lifespan)
           await util.screenshot(page)
         }).catch(error => {
-          console.warn('Execution error caught with bot', (i * pool.population) + j)
+          console.error('Execution error caught with bot', id, error)
           return error
         }))
       }

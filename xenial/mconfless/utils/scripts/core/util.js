@@ -26,9 +26,27 @@ module.exports = {
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.type(element, text)
   },
+  write: async (page, element, text) => {
+    await page.waitForSelector(element, { timeout: timeout.selector })
+    await page.type(element, text, { delay: 200 })
+  },
   screenshot: async page => {
     if (config.screenshot.enabled) {
       await page.screenshot({ path: config.screenshot.path + token() + '.png' })
     }
-  }
+  },
+  frame: async (page, name) => {
+    let fulfill
+    check()
+    return new Promise(resolve => fulfill = resolve)
+
+    function check() {
+      const frame = page.frames().find(f => f.name() === name)
+      if (frame) {
+        fulfill(frame)
+      } else {
+        page.once('framenavigated', check)
+      }
+    }
+  },
 }
