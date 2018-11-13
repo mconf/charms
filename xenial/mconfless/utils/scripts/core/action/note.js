@@ -13,11 +13,11 @@ const data = conf.config.data
 module.exports = {
   open: async page => await util.click(page, note.open, true),
   close: async page => await util.click(page, note.close),
-  write: async page => {
+  write: async (page, id) => {
     let notes = data.note
     const frame = await util.frame(page, note.frame.name, true)
     for (let i = 0; i < notes.length; i++) {
-      await util.write(frame, note.frame.pad, notes[i], true)
+      await util.write(frame, note.frame.pad, id, notes[i])
     }
   },
 }

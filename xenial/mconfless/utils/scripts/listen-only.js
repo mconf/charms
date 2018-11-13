@@ -7,6 +7,6 @@
 const action = require('./core/action.js')
 const run = require('./core/run.js')
 
-let actions = async page => await action.audio.listen(page)
+let actions = async (page, id) => await action.audio.listen(page)
 
 run(actions)

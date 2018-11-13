@@ -7,6 +7,6 @@
 const action = require('./core/action.js')
 const run = require('./core/run.js')
 
-let actions = async page => {}
+let actions = async (page, id) => {}
 
 run(actions)
