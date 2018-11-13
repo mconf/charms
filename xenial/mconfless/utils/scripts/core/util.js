@@ -28,25 +28,25 @@ module.exports = {
   },
   write: async (page, element, text) => {
     await page.waitForSelector(element, { timeout: timeout.selector })
-    await page.type(element, text, { delay: 200 })
+    await page.type(element, text, { delay: 100 })
   },
   screenshot: async page => {
     if (config.screenshot.enabled) {
       await page.screenshot({ path: config.screenshot.path + token() + '.png' })
     }
   },
-  frame: async (page, name) => {
-    let fulfill
-    check()
-    return new Promise(resolve => fulfill = resolve)
-
-    function check() {
-      const frame = page.frames().find(f => f.name() === name)
-      if (frame) {
-        fulfill(frame)
-      } else {
-        page.once('framenavigated', check)
+  frame: async (page, name, relief = false) => {
+    if (relief) await delay(timeout.relief)
+    return new Promise(resolve => {
+      function check() {
+        const frame = page.frames().find(f => f.name() === name)
+        if (frame) {
+          resolve(frame)
+        } else {
+          page.once('framenavigated', check)
+        }
       }
-    }
+      check()
+    })
   },
 }

@@ -15,9 +15,9 @@ module.exports = {
   close: async page => await util.click(page, note.close),
   write: async page => {
     let notes = data.note
-    const frame = await util.frame(page, note.iframe.name)
+    const frame = await util.frame(page, note.frame.name, true)
     for (let i = 0; i < notes.length; i++) {
-      await util.write(frame, note.iframe.pad, notes[i], true)
+      await util.write(frame, note.frame.pad, notes[i], true)
     }
   },
 }
