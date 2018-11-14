@@ -12,25 +12,43 @@ const url = config.url
 
 const delay = async time => new Promise(resolve => setTimeout(resolve, time))
 const token = () => Math.random().toString(36).substring(2, 15)
-const identificate = (id, data) => ("0" + id).slice(-2) + ": " + data
+const identify = (id, data) => ('0' + id).slice(-2) + ' - ' + data
+
+const once = async (page, name, callback) => {
+  return new Promise((resolve, reject) => {
+    let fired = false
+    setTimeout(() => {
+      if (!fired) reject('Event listener timeout: ' + name)
+    }, timeout.selector)
+    handler = () => {
+      fired = true
+      callback()
+    }
+    page.once(name, handler)
+  })
+}
 
 module.exports = {
-  identificate: (id, data) => ("0" + id).slice(-2) + ": " + data,
-  url: (id) => url.host + url.demo + url.userTag + encodeURI(identificate(id, url.user)) + url.meetingTag + encodeURI(url.meeting),
+  identify: identify,
   delay: delay,
+  url: (id) => {
+    const user = url.userTag + encodeURI(identify(id, url.user))
+    const meeting = url.meetingTag + encodeURI(url.meeting)
+    return url.host + url.demo + user + meeting
+  },
   click: async (page, element, relief = false) => {
-    if (relief) await delay(timeout.relief)
+    if (relief) await delay(config.delay.relief)
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.click(element)
   },
   type: async (page, element, text, relief = false) => {
-    if (relief) await delay(timeout.relief)
+    if (relief) await delay(config.delay.relief)
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.type(element, text)
   },
   write: async (page, element, text) => {
     await page.waitForSelector(element, { timeout: timeout.selector })
-    await page.type(element, text, { delay: 100 })
+    await page.type(element, text, { delay: config.delay.type })
   },
   screenshot: async page => {
     if (config.screenshot.enabled) {
@@ -38,15 +56,12 @@ module.exports = {
     }
   },
   frame: async (page, name, relief = false) => {
-    if (relief) await delay(timeout.relief)
-    return new Promise(resolve => {
+    if (relief) await delay(config.delay.relief)
+    return new Promise((resolve, reject) => {
       function check() {
         const frame = page.frames().find(f => f.name() === name)
-        if (frame) {
-          resolve(frame)
-        } else {
-          page.once('framenavigated', check)
-        }
+        if (frame) resolve(frame)
+        once(page, 'framenavigated', check).catch(error => reject(error))
       }
       check()
     })

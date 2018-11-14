@@ -17,7 +17,7 @@ module.exports = {
     let notes = data.note
     const frame = await util.frame(page, note.frame.name, true)
     for (let i = 0; i < notes.length; i++) {
-      let text = "\n" + util.identificate(id, notes[i])
+      let text = "\n" + util.identify(id, notes[i])
       await util.write(frame, note.frame.pad, text)
     }
   },

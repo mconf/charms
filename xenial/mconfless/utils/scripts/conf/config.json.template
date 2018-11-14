@@ -43,8 +43,11 @@
     "enabled": false,
     "path": "/tmp/"
   },
+  "delay": {
+    "relief": 1000,
+    "type": 100
+  },
   "timeout": {
-    "selector": 60000,
-    "relief": 1000
+    "selector": 60000
   }
 }
