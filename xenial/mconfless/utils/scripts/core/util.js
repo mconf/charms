@@ -20,7 +20,7 @@ const once = async (page, name, callback) => {
     setTimeout(() => {
       if (!fired) reject('Event listener timeout: ' + name)
     }, timeout.selector)
-    handler = () => {
+    const handler = () => {
       fired = true
       callback()
     }
@@ -58,7 +58,7 @@ module.exports = {
   frame: async (page, name, relief = false) => {
     if (relief) await delay(config.delay.relief)
     return new Promise((resolve, reject) => {
-      function check() {
+      const check = () => {
         const frame = page.frames().find(f => f.name() === name)
         if (frame) resolve(frame)
         once(page, 'framenavigated', check).catch(error => reject(error))
