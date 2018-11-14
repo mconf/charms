@@ -7,10 +7,11 @@ Puppeteer.
 
 Bot users in a meeting that can:
 
+  - send messages in public chat
+  - write in shared notes
   - listen audio
   - share audio
   - share video
-  - share both audio and video
   - or simply join a meeting
 
 ### Requisites
