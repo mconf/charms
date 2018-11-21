@@ -13,9 +13,16 @@ module.exports = {
   join: async page => {
     await util.click(page, video.open, true)
     await util.click(page, video.menu.share)
+    await util.click(page, video.settings.start, true)
   },
-  leave: async page => {},
+  leave: async page => {
+    await util.click(page, video.open, true)
+    await util.click(page, video.menu.unshare)
+  },
   focus: async page => {},
   stats: async page => {},
-  swap: async page => {}
+  swap: async page => {
+    await util.click(page, video.open, true)
+    await util.click(page, video.menu.swap)
+  }
 }
