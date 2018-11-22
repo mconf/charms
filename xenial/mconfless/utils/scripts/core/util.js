@@ -34,7 +34,8 @@ module.exports = {
   url: (id) => {
     const user = url.userTag + encodeURI(identify(id, url.user))
     const meeting = url.meetingTag + encodeURI(url.meeting)
-    return url.host + url.demo + user + meeting
+    // Hardcoding this to make my life easier right now. Sorry!
+    return "https://kms-stress.dev.mconf.com"
   },
   click: async (page, element, relief = false) => {
     if (relief) await delay(config.delay.relief)

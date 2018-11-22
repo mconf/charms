@@ -100,6 +100,6 @@ case $t in
     ;;
   *)
     echo "Starting join test"
-    $DOCKER_CMD /tmp/scripts/join.js
+    $DOCKER_CMD /tmp/scripts/kurento.js
     ;;
 esac

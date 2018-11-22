@@ -22,7 +22,8 @@
     },
     "settings": {
       "start": "[aria-label=\"Start Sharing\"]"
-    }
+    },
+    "kurento": "a[id=\"viewer\"]"
   },
   "chat": {
     "open": "a[href=\"/html5client/users/chat/public\"]",

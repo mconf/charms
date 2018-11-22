@@ -24,5 +24,8 @@ module.exports = {
   swap: async page => {
     await util.click(page, video.open, true)
     await util.click(page, video.menu.swap)
+  },
+  kurento: async page => {
+    await util.click(page, video.kurento, true)
   }
 }
