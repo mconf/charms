@@ -43,6 +43,9 @@
     "enabled": false,
     "path": "/tmp/"
   },
+  "test": {
+    "enabled": false
+  },
   "delay": {
     "relief": 1000,
     "type": 100

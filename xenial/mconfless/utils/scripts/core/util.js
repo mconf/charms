@@ -14,17 +14,17 @@ const delay = async time => new Promise(resolve => setTimeout(resolve, time))
 const token = () => Math.random().toString(36).substring(2, 15)
 const identify = (id, data) => ('0' + id).slice(-2) + ' - ' + data
 
-const once = async (page, name, callback) => {
+const once = async (page, event, callback) => {
   return new Promise((resolve, reject) => {
     let fired = false
     setTimeout(() => {
-      if (!fired) reject('Event listener timeout: ' + name)
+      if (!fired) reject('Event listener timeout: ' + event)
     }, timeout.selector)
     const handler = () => {
       fired = true
       callback()
     }
-    page.once(name, handler)
+    page.once(event, handler)
   })
 }
 
@@ -66,4 +66,29 @@ module.exports = {
       check()
     })
   },
+  test: async (page, evaluate) => {
+    if (config.test.enabled) {
+      await delay(config.delay.relief)
+      const accepted = await evaluate(page)
+      if (accepted) {
+        console.log('Accepted', evaluate.name)
+      } else {
+        console.error('Rejected', evaluate.name)
+      }
+    }
+  },
+  visible: async (page, element) => {
+    let visible
+    await page.waitForSelector(element, { timeout: config.delay.relief })
+      .then(() => visible = true)
+      .catch(() => visible = false)
+    return visible
+  },
+  hidden: async (page, element) => {
+    let hidden
+    await page.waitForSelector(element, { timeout: config.delay.relief })
+      .then(() => hidden = false)
+      .catch(() => hidden = true)
+    return hidden
+  }
 }

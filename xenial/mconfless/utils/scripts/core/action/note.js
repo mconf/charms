@@ -10,9 +10,21 @@ const util = require('../util.js')
 const note = conf.label.note
 const data = conf.config.data
 
+const evaluate = {
+  open: async page => true,
+  close: async page => true,
+  write: async page => true
+}
+
 module.exports = {
-  open: async page => await util.click(page, note.open, true),
-  close: async page => await util.click(page, note.close),
+  open: async page => {
+    await util.click(page, note.open, true)
+    await util.test(page, evaluate.open)
+  },
+  close: async page => {
+    await util.click(page, note.close)
+    await util.test(page, evaluate.close)
+  },
   write: async (page, id) => {
     let notes = data.note
     const frame = await util.frame(page, note.frame.name, true)
@@ -20,5 +32,6 @@ module.exports = {
       let text = "\n" + util.identify(id, notes[i])
       await util.write(frame, note.frame.pad, text)
     }
-  },
+    await util.test(page, evaluate.write)
+  }
 }

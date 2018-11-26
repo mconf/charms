@@ -1,6 +1,7 @@
 {
   "audio": {
     "dialog": {
+      "modal": "[aria-label=\"Modal\"]",
       "microphone": "[aria-label=\"Microphone\"]",
       "listen": "[aria-label=\"Listen Only\"]",
       "close": "[aria-label=\"Close\"]"
@@ -30,7 +31,8 @@
     "form": {
       "input": "#message-input",
       "send": "[aria-label=\"Send Message\"]"
-    }
+    },
+    "panel": "[aria-label=\"Chat\"]"
   },
   "note": {
     "open": "a[href=\"/html5client/users/notes\"]",
