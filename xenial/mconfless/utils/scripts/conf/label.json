@@ -41,5 +41,12 @@
       "name": "ace_inner",
       "pad": "html[dir=\"ltr\"]"
     }
-  }
+  },
+  "user": {
+    "open": "[aria-label=\"Users and Messages Toggle\"]",
+    "close": "[aria-label=\"Users and Messages Toggle\"]",
+    "panel": "[aria-label=\"User List\"]"
+  },
+  "presentation": {},
+  "whiteboard": {}
 }
