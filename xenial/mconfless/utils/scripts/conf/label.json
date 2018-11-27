@@ -84,6 +84,7 @@
     "previous": "[aria-label=\"Previous slide\"]"
   },
   "whiteboard": {
+    "board": "svg._imports_ui_components_presentation__styles__svgStyles",
     "tools": {
       "open": "[aria-label=\"Tools\"]",
       "text": "[aria-label=\"Text\"]",

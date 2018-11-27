@@ -36,6 +36,10 @@
       "Eu vou mostrar pro mundo inteiro...",
       "Mundo inteiro!"
     ],
+    "whiteboard": {
+      "points": 10,
+      "steps": 50
+    },
     "audio": "/home/pptruser/alternative-audio.wav",
     "video": "/home/pptruser/alternative-video.y4m"
   },
