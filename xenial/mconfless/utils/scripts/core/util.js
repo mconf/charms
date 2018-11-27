@@ -71,9 +71,11 @@ module.exports = {
       await delay(config.delay.relief)
       const accepted = await evaluate(page)
       if (accepted) {
-        console.log('Accepted', evaluate.name)
+        console.log('\x1b[32m%s\x1b[0m', 'PASS', evaluate.name)
       } else {
-        console.error('Rejected', evaluate.name)
+        console.log('\x1b[31m%s\x1b[0m', 'FAIL', evaluate.name)
+        let filename = evaluate.name + '-' + token() + '.png'
+        await page.screenshot({ path: config.screenshot.path + filename })
       }
     }
   },

@@ -28,6 +28,12 @@
   "chat": {
     "open": "a[href=\"/html5client/users/chat/public\"]",
     "close": "[aria-label=\"Hide Public Chat\"]",
+    "options": {
+      "open": "[aria-label=\"Chat Options\"]",
+      "save": "",
+      "copy": "",
+      "clear": ""
+    },
     "form": {
       "input": "#message-input",
       "send": "[aria-label=\"Send Message\"]"
