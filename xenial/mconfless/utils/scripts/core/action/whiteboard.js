@@ -22,27 +22,41 @@ const evaluate = {
 
 module.exports = {
   text: async page => {
+    await util.click(page, whiteboard.tools.open)
+    await util.click(page, whiteboard.tools.text, true)
     await util.test(page, evaluate.text)
   },
   line: async page => {
+    await util.click(page, whiteboard.tools.open)
+    await util.click(page, whiteboard.tools.line, true)
     await util.test(page, evaluate.line)
   },
   ellipse: async page => {
+    await util.click(page, whiteboard.tools.open)
+    await util.click(page, whiteboard.tools.ellipse, true)
     await util.test(page, evaluate.ellipse)
   },
   triangle: async page => {
+    await util.click(page, whiteboard.tools.open)
+    await util.click(page, whiteboard.tools.triangle, true)
     await util.test(page, evaluate.triangle)
   },
   rectangle: async page => {
+    await util.click(page, whiteboard.tools.open)
+    await util.click(page, whiteboard.tools.rectangle, true)
     await util.test(page, evaluate.rectangle)
   },
   pencil: async page => {
+    await util.click(page, whiteboard.tools.open)
+    await util.click(page, whiteboard.tools.pencil, true)
     await util.test(page, evaluate.pencil)
   },
   undo: async page => {
+    await util.click(page, whiteboard.undo)
     await util.test(page, evaluate.undo)
   },
   clear: async page => {
+    await util.click(page, whiteboard.clear)
     await util.test(page, evaluate.clear)
   }
 }

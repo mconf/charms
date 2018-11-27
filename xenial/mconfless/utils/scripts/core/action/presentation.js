@@ -12,7 +12,8 @@ const presentation = conf.label.presentation
 const evaluate = {
   upload: async page => true,
   change: async page => true,
-  slide: async page => true
+  next: async page => true,
+  previous: async page => true
 }
 
 module.exports = {
@@ -22,7 +23,10 @@ module.exports = {
   change: async page => {
     await util.test(page, evaluate.change)
   },
-  slide: async page => {
-    await util.test(page, evaluate.slide)
+  next: async page => {
+    await util.test(page, evaluate.next)
+  },
+  previous: async page => {
+    await util.test(page, evaluate.previous)
   }
 }
