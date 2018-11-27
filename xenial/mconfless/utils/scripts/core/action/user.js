@@ -9,6 +9,12 @@ const util = require('../util.js')
 
 const user = conf.label.user
 
+const status = async (page, emoji) => {
+  await util.click(page, user.me, true)
+  await util.click(page, user.status.open, true)
+  await util.click(page, emoji, true)
+}
+
 const evaluate = {
   open: {
     description: 'open users list',
@@ -74,41 +80,52 @@ const evaluate = {
 
 module.exports = {
   open: async page => {
-    await util.click(page, user.open)
+    await util.click(page, user.open, true)
     await util.test(page, evaluate.open)
   },
   close: async page => {
-    await util.click(page, user.close)
+    await util.click(page, user.close, true)
     await util.test(page, evaluate.close)
   },
   away: async page => {
+    await status(page, user.status.away)
     await util.test(page, evaluate.away)
   },
   hand: async page => {
+    await status(page, user.status.hand)
     await util.test(page, evaluate.hand)
   },
   undecided: async page => {
+    await status(page, user.status.undecided)
     await util.test(page, evaluate.undecided)
   },
   confused: async page => {
+    await status(page, user.status.confused)
     await util.test(page, evaluate.confused)
   },
   sad: async page => {
+    await status(page, user.status.sad)
     await util.test(page, evaluate.sad)
   },
   happy: async page => {
+    await status(page, user.status.happy)
     await util.test(page, evaluate.happy)
   },
   applaud: async page => {
+    await status(page, user.status.applaud)
     await util.test(page, evaluate.applaud)
   },
   up: async page => {
+    await status(page, user.status.up)
     await util.test(page, evaluate.up)
   },
   down: async page => {
+    await status(page, user.status.down)
     await util.test(page, evaluate.down)
   },
   clear: async page => {
+    await util.click(page, user.me, true)
+    await util.click(page, user.status.clear, true)
     await util.test(page, evaluate.clear)
   },
   promote: async page => {
