@@ -7,12 +7,19 @@
 const conf = require('./conf.js')
 
 const config = conf.config
+const label = conf.label
 const timeout = config.timeout
-const url = config.url
 
 const delay = async time => new Promise(resolve => setTimeout(resolve, time))
-const token = () => Math.random().toString(36).substring(2, 15)
+const timestamp = () => Math.floor(new Date() / 1000)
 const identify = (id, data) => ('0' + id).slice(-2) + ' - ' + data
+
+const url = id => {
+  const username = identify(id, config.url.user)
+  const user = config.url.userTag + encodeURI(username)
+  const meeting = config.url.meetingTag + encodeURI(config.url.meeting)
+  return config.url.host + config.url.demo + user + meeting
+}
 
 const once = async (page, event, callback) => {
   return new Promise((resolve, reject) => {
@@ -31,20 +38,20 @@ const once = async (page, event, callback) => {
 module.exports = {
   identify: identify,
   delay: delay,
-  url: (id) => {
-    const user = url.userTag + encodeURI(identify(id, url.user))
-    const meeting = url.meetingTag + encodeURI(url.meeting)
-    return url.host + url.demo + user + meeting
+  join: async (page, id) => {
+    await page.goto(url(id))
+    await page.waitForSelector(label.audio.dialog.modal, { timeout: timeout.selector })
+    await delay(config.delay.animation)
   },
-  click: async (page, element, relief = false) => {
-    if (relief) await delay(config.delay.relief)
+  click: async (page, element, animation = false) => {
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.click(element)
+    if (animation) await delay(config.delay.animation)
   },
-  type: async (page, element, text, relief = false) => {
-    if (relief) await delay(config.delay.relief)
+  type: async (page, element, text, animation = false) => {
     await page.waitForSelector(element, { timeout: timeout.selector })
     await page.type(element, text)
+    if (animation) await delay(config.delay.animation)
   },
   write: async (page, element, text) => {
     await page.waitForSelector(element, { timeout: timeout.selector })
@@ -52,7 +59,7 @@ module.exports = {
   },
   screenshot: async page => {
     if (config.screenshot.enabled) {
-      await page.screenshot({ path: config.screenshot.path + token() + '.png' })
+      await page.screenshot({ path: config.screenshot.path + timestamp() + '.png' })
     }
   },
   frame: async (page, name, relief = false) => {
@@ -69,12 +76,12 @@ module.exports = {
   test: async (page, evaluate) => {
     if (config.test.enabled) {
       await delay(config.delay.relief)
-      const accepted = await evaluate(page)
+      const accepted = await evaluate.test(page)
       if (accepted) {
-        console.log('\x1b[32m%s\x1b[0m', 'PASS', evaluate.name)
+        console.log('\x1b[32m%s\x1b[0m', 'PASS', evaluate.description)
       } else {
-        console.log('\x1b[31m%s\x1b[0m', 'FAIL', evaluate.name)
-        let filename = evaluate.name + '-' + token() + '.png'
+        console.log('\x1b[31m%s\x1b[0m', 'FAIL', evaluate.description)
+        let filename = evaluate.description + ' - ' + timestamp() + '.png'
         await page.screenshot({ path: config.screenshot.path + filename })
       }
     }

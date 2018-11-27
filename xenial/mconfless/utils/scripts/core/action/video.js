@@ -10,11 +10,26 @@ const util = require('../util.js')
 const video = conf.label.video
 
 const evaluate = {
-  join: async page => true,
-  leave: async page => true,
-  focus: async page => true,
-  stats: async page => true,
-  swap: async page => true
+  join: {
+    description: 'share video',
+    test: async page => true
+  },
+  leave: {
+    description: 'unshare video',
+    test: async page => true
+  },
+  focus: {
+    description: 'focus video',
+    test: async page => true
+  },
+  stats: {
+    description: 'show video stats',
+    test: async page => true
+  },
+  swap: {
+    description: 'swap main content',
+    test: async page => true
+  }
 }
 
 module.exports = {
@@ -26,7 +41,7 @@ module.exports = {
   },
   leave: async page => {
     await util.click(page, video.open, true)
-    await util.click(page, video.menu.unshare)
+    await util.click(page, video.menu.unshare, true)
     await util.test(page, evaluate.leave)
   },
   focus: async page => {

@@ -10,14 +10,38 @@ const util = require('../util.js')
 const whiteboard = conf.label.whiteboard
 
 const evaluate = {
-  text: async page => true,
-  line: async page => true,
-  ellipse: async page => true,
-  triangle: async page => true,
-  rectangle: async page => true,
-  pencil: async page => true,
-  undo: async page => true,
-  clear: async page => true
+  text: {
+    description: 'write textual annotation',
+    test: async page => true
+  },
+  line: {
+    description: 'draw linear annotation',
+    test: async page => true
+  },
+  ellipse: {
+    description: 'draw elliptical annotation',
+    test: async page => true
+  },
+  triangle: {
+    description: 'draw triangular annotation',
+    test: async page => true
+  },
+  rectangle: {
+    description: 'draw rectangular annotation',
+    test: async page => true
+  },
+  pencil: {
+    description: 'draw pencil annotation',
+    test: async page => true
+  },
+  undo: {
+    description: 'undo annotation',
+    test: async page => true
+  },
+  clear: {
+    description: 'clear annotations',
+    test: async page => true
+  }
 }
 
 module.exports = {

@@ -20,7 +20,7 @@ const run = async actions => {
         await util.delay(bot.wait)
         promises.push(browser.newPage().then(async page => {
           console.log('Spawning bot', id)
-          await page.goto(util.url(id))
+          await util.join(page, id)
           await actions(page, id)
           await page.waitFor(bot.lifespan)
           await util.screenshot(page)

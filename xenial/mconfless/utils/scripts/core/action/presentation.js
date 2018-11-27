@@ -10,10 +10,22 @@ const util = require('../util.js')
 const presentation = conf.label.presentation
 
 const evaluate = {
-  upload: async page => true,
-  change: async page => true,
-  next: async page => true,
-  previous: async page => true
+  upload: {
+    description: 'upload presentation',
+    test: async page => true
+  },
+  change: {
+    description: 'change presentation',
+    test: async page => true
+  },
+  next: {
+    description: 'next slide',
+    test: async page => true
+  },
+  previous: {
+    description: 'previous slide',
+    test: async page => true
+  }
 }
 
 module.exports = {

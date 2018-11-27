@@ -48,6 +48,7 @@
   },
   "delay": {
     "relief": 1000,
+    "animation": 2000,
     "type": 100
   },
   "timeout": {

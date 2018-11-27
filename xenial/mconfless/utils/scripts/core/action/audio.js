@@ -10,18 +10,39 @@ const util = require('../util.js')
 const audio = conf.label.audio
 
 const evaluate = {
-  join: async page => await util.visible(page, audio.dialog.modal),
-  microphone: async page => await util.visible(page, audio.leave),
-  listen: async page => await util.visible(page, audio.leave),
-  close: async page => await util.hidden(page, audio.dialog.modal),
-  mute: async page => await util.visible(page, audio.unmute),
-  unmute: async page => await util.visible(page, audio.mute),
-  leave: async page => await util.visible(page, audio.join)
+  join: {
+    description: 'open audio dialog',
+    test: async page => await util.visible(page, audio.dialog.modal)
+  },
+  microphone: {
+    description: 'join microphone',
+    test: async page => await util.visible(page, audio.leave)
+  },
+  listen: {
+    description: 'join listener',
+    test: async page => await util.visible(page, audio.leave)
+  },
+  close: {
+    description: 'close audio dialog',
+    test: async page => await util.hidden(page, audio.dialog.modal)
+  },
+  mute: {
+    description: 'mute microphone',
+    test: async page => await util.visible(page, audio.unmute)
+  },
+  unmute: {
+    description: 'unmute microphone',
+    test: async page => await util.visible(page, audio.mute)
+  },
+  leave: {
+    description: 'leave audio',
+    test: async page => await util.visible(page, audio.join)
+  }
 }
 
 module.exports = {
   join: async page => {
-    await util.click(page, audio.join)
+    await util.click(page, audio.join, true)
     await util.test(page, evaluate.join)
   },
   microphone: async page => {

@@ -11,12 +11,30 @@ const chat = conf.label.chat
 const data = conf.config.data
 
 const evaluate = {
-  open: async page => await util.visible(page, chat.panel),
-  close: async page => await util.hidden(page, chat.panel),
-  send: async page => true,
-  clear: async page => true,
-  copy: async page => true,
-  save: async page => true
+  open: {
+    description: 'open chat',
+    test: async page => await util.visible(page, chat.panel)
+  },
+  close: {
+    description: 'close chat',
+    test: async page => await util.hidden(page, chat.panel)
+  },
+  send: {
+    description: 'send chat message',
+    test: async page => true
+  },
+  clear: {
+    description: 'clear chat',
+    test: async page => true
+  },
+  copy: {
+    description: 'copy chat',
+    test: async page => true
+  },
+  save: {
+    description: 'save chat',
+    test: async page => true
+  }
 }
 
 module.exports = {
@@ -25,14 +43,14 @@ module.exports = {
     await util.test(page, evaluate.open)
   },
   close: async page => {
-    await util.click(page, chat.close)
+    await util.click(page, chat.close, true)
     await util.test(page, evaluate.close)
   },
   send: async page => {
     let messages = data.chat
     for (let i = 0; i < messages.length; i++) {
-      await util.type(page, chat.form.input, messages[i], true)
-      await util.click(page, chat.form.send)
+      await util.type(page, chat.form.input, messages[i])
+      await util.click(page, chat.form.send, true)
     }
     await util.test(page, evaluate.send)
   },

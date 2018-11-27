@@ -11,9 +11,18 @@ const note = conf.label.note
 const data = conf.config.data
 
 const evaluate = {
-  open: async page => true,
-  close: async page => true,
-  write: async page => true
+  open: {
+    description: 'open note',
+    test: async page => true
+  },
+  close: {
+    description: 'close note',
+    test: async page => true
+  },
+  write: {
+    description: 'write note',
+    test: async page => true
+  }
 }
 
 module.exports = {
@@ -22,7 +31,7 @@ module.exports = {
     await util.test(page, evaluate.open)
   },
   close: async page => {
-    await util.click(page, note.close)
+    await util.click(page, note.close, true)
     await util.test(page, evaluate.close)
   },
   write: async (page, id) => {

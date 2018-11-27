@@ -30,9 +30,9 @@
     "close": "[aria-label=\"Hide Public Chat\"]",
     "options": {
       "open": "[aria-label=\"Chat Options\"]",
-      "save": "",
-      "copy": "",
-      "clear": ""
+      "save": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-save_notes",
+      "copy": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-copy",
+      "clear": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-delete"
     },
     "form": {
       "input": "#message-input",
@@ -51,6 +51,31 @@
   "user": {
     "open": "[aria-label=\"Users and Messages Toggle\"]",
     "close": "[aria-label=\"Users and Messages Toggle\"]",
+    "status": {
+      "open": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-user",
+      "away": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-time",
+      "hand": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-hand",
+      "undecided": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-undecided",
+      "confused": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-confused",
+      "sad": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-sad",
+      "happy": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-happy",
+      "applaud": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-applause",
+      "up": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-thumbs_up",
+      "down": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-thumbs_down",
+      "clear": "i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-clear_status",
+      "avatar": {
+        "away": "[aria-label$=\"You Status away\"]",
+        "hand": "[aria-label$=\"You Status raiseHand\"]",
+        "undecided": "[aria-label$=\"You Status neutral\"]",
+        "confused": "[aria-label$=\"You Status confused\"]",
+        "sad": "[aria-label$=\"You Status sad\"]",
+        "happy": "[aria-label$=\"You Status happy\"]",
+        "applaud": "[aria-label$=\"You Status applause\"]",
+        "up": "[aria-label$=\"You Status thumbsUp\"]",
+        "down": "[aria-label$=\"You Status ThumbsDown\"]",
+        "clear": "[aria-label$=\"You Status none\"]"
+      }
+    },
     "panel": "[aria-label=\"User List\"]"
   },
   "presentation": {
