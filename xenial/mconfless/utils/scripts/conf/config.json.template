@@ -37,8 +37,16 @@
       "Mundo inteiro!"
     ],
     "whiteboard": {
-      "points": 10,
-      "steps": 50
+      "distance": 10,
+      "text": [
+        "Vamos passo a passo outra vez 1, 2, 3",
+        "Vou pôr no remelexo vocês 1, 2, 3",
+        "É fácil de aprender, é só se resolver",
+        "Se liga no mestiço que agora ele chegou de vez"
+      ],
+      "pencil": {
+        "points": 5
+      }
     },
     "audio": "/home/pptruser/alternative-audio.wav",
     "video": "/home/pptruser/alternative-video.y4m"
