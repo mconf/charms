@@ -5,7 +5,7 @@
  */
 
 const config = require('../conf/config.json')
-const label = require('../conf/label.json')
+const label = require('../conf/label.js')
 
 module.exports = {
   config: config,
