@@ -4,6 +4,8 @@
     "demo": "/demo/demoHTML5.jsp?action=create",
     "userTag": "&username=",
     "user": "Boty McBotface",
+    "moderatorTag": "&isModerator=",
+    "moderator": true,
     "meetingTag": "&meetingname=",
     "meeting": ROOM
   },

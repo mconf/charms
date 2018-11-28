@@ -17,8 +17,9 @@ const identify = (id, data) => ('0' + id).slice(-2) + ' - ' + data
 const url = id => {
   const username = identify(id, config.url.user)
   const user = config.url.userTag + encodeURI(username)
+  const moderator = config.url.moderatorTag + config.url.moderator
   const meeting = config.url.meetingTag + encodeURI(config.url.meeting)
-  return config.url.host + config.url.demo + user + meeting
+  return config.url.host + config.url.demo + user + moderator + meeting
 }
 
 const once = async (page, event, callback) => {
