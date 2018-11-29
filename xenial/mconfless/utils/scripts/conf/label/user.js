@@ -2,7 +2,7 @@ module.exports = {
   open: '[aria-label="Users and Messages Toggle"]',
   close: '[aria-label="Users and Messages Toggle"]',
   me: '[aria-label~="You"]',
-  presenter: 'i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-presentation',
+  present: 'i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-presentation',
   promote: 'i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-promote',
   demote: 'i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-user',
   status: {

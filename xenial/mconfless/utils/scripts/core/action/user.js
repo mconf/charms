@@ -64,6 +64,10 @@ const evaluate = {
     description: 'clear user status',
     test: async page => await util.visible(page, user.status.avatar.clear)
   },
+  present: {
+    description: 'set presenter',
+    test: async page => true
+  },
   promote: {
     description: 'promote user',
     test: async page => true
@@ -127,6 +131,11 @@ module.exports = {
     await util.click(page, user.me, true)
     await util.click(page, user.status.clear, true)
     await util.test(page, evaluate.clear)
+  },
+  present: async page => {
+    await util.click(page, user.me, true)
+    await util.click(page, user.present, true)
+    await util.test(page, evaluate.present)
   },
   promote: async page => {
     await util.test(page, evaluate.promote)

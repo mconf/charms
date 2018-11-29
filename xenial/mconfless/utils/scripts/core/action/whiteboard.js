@@ -13,10 +13,25 @@ const data = conf.config.data
 const point = box => ({ x: box.x + (Math.random() * box.width), y: box.y + (Math.random() * box.height) })
 const distance = (a, b) => Math.hypot(b.x - a.x, b.y - a.y)
 const steps = (a, b) => Math.floor(distance(a, b) / data.whiteboard.distance)
+const random = (collection) => collection[Math.floor(Math.random() * collection.length)]
+const color = () => random(whiteboard.colors.palette)
+const thickness = () => random(whiteboard.thickness.sizes)
+
+const paint = async page => {
+  await util.click(page, whiteboard.colors.open, true)
+  await util.click(page, color(), true)
+}
+
+const brush = async page => {
+  await util.click(page, whiteboard.thickness.open, true)
+  await util.click(page, thickness(), true)
+}
 
 const draw = async (page, tool, points = 2) => {
   await util.click(page, whiteboard.tools.open, true)
   await util.click(page, tool, true)
+  await paint(page)
+  await brush(page)
 
   const board = await page.$(whiteboard.board)
   const box = await board.boundingBox()
