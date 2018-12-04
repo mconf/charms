@@ -4,13 +4,11 @@
  * @desc Join note bots in a meeting
  */
 
-const action = require('./core/action.js')
-const run = require('./core/run.js')
+const bigbluebot = require('bigbluebot')
 
-let actions = async (page, id) => {
-  await action.audio.close(page)
-  await action.note.open(page)
-  await action.note.write(page, id)
+let actions = async page => {
+  await bigbluebot.note.open(page)
+  await bigbluebot.note.write(page)
 }
 
-run(actions)
+bigbluebot.run(actions)

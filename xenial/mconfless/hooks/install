@@ -19,22 +19,17 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get -y install docker-engine
 
-# To run docker without sudo:
-#  sudo usermod -aG docker ubuntu
-#  sudo su - ubuntu
+docker pull justinribeiro/chrome-headless
 
-# When trying to run it locally, this might help:
-# https://stackoverflow.com/questions/45731683/docker-pull-operation-not-permitted
-#  sudo systemctl stop docker
-#  echo "{\"storage-driver\": \"overlay\"}" | sudo tee /etc/docker/daemon.json
-#  sudo systemctl start docker
-
-sudo docker login -u DOCKER_USERNAME -p DOCKER_PASSWORD
-sudo docker pull mconf/puppeteer:html5
+# Installing Node
+curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo apt-get update
+sudo apt-get install nodejs
 
 # Copying run script
 cp hooks/run /tmp
 chmod +x /tmp/run
 
 # Copying test scripts
-cp -r utils/scripts /tmp
+cp -r utils/mconfless /tmp

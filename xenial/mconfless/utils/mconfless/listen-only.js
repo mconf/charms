@@ -4,9 +4,8 @@
  * @desc Join listen-only bots in a meeting
  */
 
-const action = require('./core/action.js')
-const run = require('./core/run.js')
+const bigbluebot = require('bigbluebot')
 
-let actions = async (page, id) => await action.audio.listen(page)
+let actions = async page => await bigbluebot.audio.dialog.listen(page)
 
-run(actions)
+bigbluebot.run(actions)

@@ -4,12 +4,10 @@
  * @desc Join video bots in a meeting
  */
 
-const action = require('./core/action.js')
-const run = require('./core/run.js')
+const bigbluebot = require('bigbluebot')
 
-let actions = async (page, id) => {
-  await action.audio.close(page)
-  await action.video.join(page)
+let actions = async page => {
+  await bigbluebot.video.join(page)
 }
 
-run(actions)
+bigbluebot.run(actions)

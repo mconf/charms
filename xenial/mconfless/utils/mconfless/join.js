@@ -4,9 +4,8 @@
  * @desc Join bots in a HTML5 meeting
  */
 
-const action = require('./core/action.js')
-const run = require('./core/run.js')
+const bigbluebot = require('bigbluebot')
 
-let actions = async (page, id) => {}
+let actions = async page => {}
 
-run(actions)
+bigbluebot.run(actions)
