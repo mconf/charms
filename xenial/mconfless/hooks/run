@@ -55,51 +55,55 @@ while getopts ":t:h:r:b:w:l:" o; do
   esac
 done
 
+cd /tmp/mconfless
+
 echo "Copying config file..."
-cp -rf /tmp/scripts/conf/config.json.template /tmp/scripts/conf/config.json
+cp -rf .env.template .env
+
+npm install
+
+export BIGBLUEBOT_BROWSER=google-chrome
 
 echo "Setting test variables..."
-sed -e "s,HOST,\"$h\",g" -i /tmp/scripts/conf/config.json
+export BIGBLUEBOT_HOST=$h
 echo "Host: $h"
-sed -e "s,ROOM,\"$r\",g" -i /tmp/scripts/conf/config.json
+export BIGBLUEBOT_ROOM=$r
 echo "Room: $r"
-sed -e "s,BOTS,$b,g" -i /tmp/scripts/conf/config.json
+export BIGBLUEBOT_BOTS=$b
 echo "Bots: $b"
-sed -e "s,WAIT,$w,g" -i /tmp/scripts/conf/config.json
+export BIGBLUEBOT_WAIT=$w
 echo "Wait: $w"
-sed -e "s,LIFE,$l,g" -i /tmp/scripts/conf/config.json
+export BIGBLUEBOT_LIFE=$l
 echo "Life: $l"
-
-DOCKER_CMD="sudo docker run -i --rm -v /tmp:/tmp --cap-add=SYS_ADMIN mconf/puppeteer:html5 node"
 
 echo "Running Docker..."
 case $t in
   lis)
     echo "Starting listen only test"
-    $DOCKER_CMD /tmp/scripts/listen-only.js
+    node listen-only.js
     ;;
   mic)
     echo "Starting audio test"
-    $DOCKER_CMD /tmp/scripts/audio.js
+    node audio.js
     ;;
   cam)
     echo "Starting video test"
-    $DOCKER_CMD /tmp/scripts/video.js
+    node video.js
     ;;
   all)
     echo "Starting audio and video test"
-    $DOCKER_CMD /tmp/scripts/audio-and-video.js
+    node audio-and-video.js
     ;;
   msg)
     echo "Starting chat test"
-    $DOCKER_CMD /tmp/scripts/chat.js
+    node chat.js
     ;;
   pad)
     echo "Starting note test"
-    $DOCKER_CMD /tmp/scripts/note.js
+    node note.js
     ;;
   *)
     echo "Starting join test"
-    $DOCKER_CMD /tmp/scripts/join.js
+    node join.js
     ;;
 esac
