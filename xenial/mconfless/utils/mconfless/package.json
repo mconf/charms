@@ -1,0 +1,11 @@
+{
+  "name": "mconfless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "join.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro Beschorner Marin <pedrobmarin@gmail.com>",
+  "license": "MIT"
+}
