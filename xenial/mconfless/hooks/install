@@ -19,6 +19,7 @@ sudo add-apt-repository \
 sudo apt-get update
 sudo apt-get -y install docker-engine
 
+# Pulling headless Chrome image
 sudo docker pull justinribeiro/chrome-headless
 sudo docker run -d -p 9222:9222 --cap-add=SYS_ADMIN justinribeiro/chrome-headless
 
@@ -26,11 +27,16 @@ sudo docker run -d -p 9222:9222 --cap-add=SYS_ADMIN justinribeiro/chrome-headles
 curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 sudo apt-get update
-sudo apt-get install nodejs
+sudo apt-get install -y nodejs
 
-# Copying run script
-cp hooks/run /tmp
-chmod +x /tmp/run
+# Copying mconfless script
+sudo cp hooks/mconfless /usr/bin
+sudo chmod +x /usr/bin/mconfless
 
-# Copying test scripts
-cp -r utils/mconfless /tmp
+# Copying bigbluebot scripts
+sudo cp -r utils/mconfless /home/ubuntu
+
+cd /home/ubuntu/mconfless
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false
+sudo npm install bigbluebot
+sudo chown -R ubuntu:ubuntu /home/ubuntu/mconfless

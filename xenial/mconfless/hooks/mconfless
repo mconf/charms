@@ -2,7 +2,7 @@
 
 set -e
 
-t="join"
+p="/home/ubuntu/mconfless/join.js"
 h="https://html5.dev.mconf.com"
 r="Test Room"
 b=1
@@ -11,14 +11,7 @@ l=60000
 
 usage() {
   echo "Usage: $0"
-  echo "  -t test"
-  echo "           lis"
-  echo "           mic"
-  echo "           cam"
-  echo "           all"
-  echo "           msg"
-  echo "           pad"
-  echo "  default: join"
+  echo "  -p path"
   echo "  -h host  server url         default: https://html5.dev.mconf.com"
   echo "  -r room  room name          default: \"Test Room\""
   echo "  -b bots  number of bots     default: 1"
@@ -28,11 +21,10 @@ usage() {
 }
 
 # Gather run arguments
-while getopts ":t:h:r:b:w:l:" o; do
+while getopts ":p:h:r:b:w:l:" o; do
   case "${o}" in
-    t)
-      t=${OPTARG}
-      ((t == "lis" || t == "mic" || t == "cam" || t == "msg" || t == "pad" || t == "all")) || usage
+    p)
+      p=${OPTARG}
       ;;
     h)
       h=${OPTARG}
@@ -55,13 +47,6 @@ while getopts ":t:h:r:b:w:l:" o; do
   esac
 done
 
-cd /tmp/mconfless
-
-echo "Copying config file..."
-cp -rf .env.template .env
-
-npm install
-
 export BIGBLUEBOT_BROWSER=google-chrome
 
 echo "Setting test variables..."
@@ -76,34 +61,5 @@ echo "Wait: $w"
 export BIGBLUEBOT_LIFE=$l
 echo "Life: $l"
 
-echo "Running Docker..."
-case $t in
-  lis)
-    echo "Starting listen only test"
-    node listen-only.js
-    ;;
-  mic)
-    echo "Starting audio test"
-    node audio.js
-    ;;
-  cam)
-    echo "Starting video test"
-    node video.js
-    ;;
-  all)
-    echo "Starting audio and video test"
-    node audio-and-video.js
-    ;;
-  msg)
-    echo "Starting chat test"
-    node chat.js
-    ;;
-  pad)
-    echo "Starting note test"
-    node note.js
-    ;;
-  *)
-    echo "Starting join test"
-    node join.js
-    ;;
-esac
+echo "Running..."
+node $p
