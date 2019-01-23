@@ -34,9 +34,9 @@ sudo cp hooks/mconfless /usr/bin
 sudo chmod +x /usr/bin/mconfless
 
 # Copying bigbluebot scripts
-sudo cp -r utils/mconfless /home/ubuntu
+sudo cp -r utils/.mconfless /home/ubuntu
 
-cd /home/ubuntu/mconfless
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false
+cd /home/ubuntu/.mconfless
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 sudo npm install bigbluebot
-sudo chown -R ubuntu:ubuntu /home/ubuntu/mconfless
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.mconfless

@@ -55,16 +55,16 @@ sudo ./run
 ```
 the *run* script accept arguments:
 ```
- -t test  <lis|mic|cam|all>  default: join
- -h host  server url         default: https://html5.dev.mconf.com
- -r room  room name          default: "Test Room"
+ -t test  test script        default: join.js
+ -h host  server url         default: https://test-live220.dev.mconf.com
+ -r room  room name          default: "Demo Meeting"
  -b bots  number of bots     default: 1
  -w wait  time between bots  default: 2000 (2 seconds)
  -l life  bot life span      default: 60000 (60 seconds)
 ```
-Where 5 bots sharing michrophone at "Demo Meeting" with 5 seconds between bots be:
+Where 5 bots sharing michrophone with 5 seconds between bots be:
 ```shell
-sudo ./run -t mic -r "Demo Meeting" -b 5 -w 5000
+sudo ./run -t audio.js -b 5 -w 5000
 ```
 
 #### At AWS Cloud
@@ -86,25 +86,25 @@ juju deploy ./xenial/mconfless --series xenial
 ```
 Running the test scripts:
 ```shell
-juju run "sudo /tmp/run" --all
+juju run "sudo mconfless" --all
 ```
 the *run* script accept arguments:
 ```
- -t test  <lis|mic|cam|all>  default: join
- -h host  server url         default: https://html5.dev.mconf.com
- -r room  room name          default: "Test Room"
+ -t test  test script        default: join.js
+ -h host  server url         default: https://test-live220.dev.mconf.com
+ -r room  room name          default: "Demo Meeting"
  -b bots  number of bots     default: 1
  -w wait  time between bots  default: 2000 (2 seconds)
  -l life  bot life span      default: 60000 (60 seconds)
 ```
-Where 3 bots sharing camera at "Demo Meeting" with 10 seconds between bots be:
+Where 3 bots sharing camera with 10 seconds between bots be:
 ```shell
-juju run "sudo /tmp/run -t cam -r \"Demo Meeting\" -b 3 -w 10000" --all
+juju run "sudo mconfless -t video.js -b 3 -w 10000" --all
 ```
 Juju uses as default a 5 minutes timeout to the _run_ command. Some tests may
 last more than that so be sure to set a bigger timeout in those cases, e.g.:
 ```shell
-juju run "sudo /tmp/run -b 100 -w 20000" --timeout 30m0s --all
+juju run "sudo mconfless -b 100 -w 20000" --timeout 30m0s --all
 ```
 
 ##### Scale out usage
