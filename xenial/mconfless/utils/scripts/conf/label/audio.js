@@ -3,7 +3,7 @@ module.exports = {
     modal: '[aria-label="Modal"]',
     microphone: '[aria-label="Microphone"]',
     listen: '[aria-label="Listen Only"]',
-    close: '[aria-label="Close"]'
+    close: '[aria-label="Cancel"]'
   },
   echo: {
     confirm: '[aria-label="Echo is audible"]'
