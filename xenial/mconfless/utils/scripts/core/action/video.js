@@ -34,8 +34,7 @@ const evaluate = {
 
 module.exports = {
   join: async page => {
-    await util.click(page, video.open, true)
-    await util.click(page, video.menu.share, true)
+    await util.click(page, video.join, true)
     await util.click(page, video.settings.start, true)
     await util.test(page, evaluate.join)
   },
