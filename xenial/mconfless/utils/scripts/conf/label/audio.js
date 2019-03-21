@@ -2,7 +2,7 @@ module.exports = {
   dialog: {
     modal: '[aria-label="Modal"]',
     microphone: '[aria-label="Microphone"]',
-    listen: '[aria-label="Listen Only"]',
+    listen: '[aria-label="Listen only"]',
     close: '[aria-label="Cancel"]'
   },
   echo: {
