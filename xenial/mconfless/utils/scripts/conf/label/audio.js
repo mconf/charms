@@ -1,9 +1,9 @@
 module.exports = {
   dialog: {
-    modal: '[aria-label="Modal"]',
+    modal: '[aria-label="Join audio modal"]',
     microphone: '[aria-label="Microphone"]',
     listen: '[aria-label="Listen only"]',
-    close: '[aria-label="Cancel"]'
+    close: '[aria-label="Close Join audio modal"]'
   },
   echo: {
     confirm: '[aria-label="Echo is audible"]'
