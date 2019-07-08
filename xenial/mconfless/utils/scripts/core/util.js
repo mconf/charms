@@ -40,7 +40,8 @@ module.exports = {
   identify: identify,
   delay: delay,
   join: async (page, id) => {
-    await page.goto(url(id))
+    //console.log(url(id))
+    await page.goto(url(id), { timeout: 600000, waitUntil: 'domcontentloaded' })
     await page.waitForSelector(label.audio.dialog.modal, { timeout: timeout.selector })
     await delay(config.delay.animation)
   },
