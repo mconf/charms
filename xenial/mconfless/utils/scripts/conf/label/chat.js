@@ -1,5 +1,5 @@
 module.exports = {
-  open: 'a[href="/html5client/users/chat/public"]',
+  open: '[aria-label="Public Chat"]',
   close: '[aria-label="Hide Public Chat"]',
   options: {
     open: '[aria-label="Chat Options"]',
@@ -8,8 +8,8 @@ module.exports = {
     clear: 'i._imports_ui_components_dropdown_list__styles__itemIcon.icon-bbb-delete'
   },
   form: {
-    input: '#message-input',
-    send: '[aria-label="Send Message"]'
+    input: '[aria-label="Message input for chat Public Chat"]',
+    send: '[aria-label="Send message"]'
   },
   panel: '[aria-label="Chat"]'
 }

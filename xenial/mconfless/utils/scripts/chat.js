@@ -9,7 +9,8 @@ const run = require('./core/run.js')
 
 let actions = async (page, id) => {
   await action.audio.close(page)
-  await action.chat.open(page)
+  // If chat isn't automatically opened on join:
+  // await action.chat.open(page)
   await action.chat.send(page)
 }
 
