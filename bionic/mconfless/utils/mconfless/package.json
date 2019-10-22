@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "bigbluebot": "^1.2.1"
+    "bigbluebot": "^1.2.2"
   },
   "author": "Pedro Beschorner Marin <pedrobmarin@gmail.com>",
-  "license": "MIT",
+  "license": "MIT"
 }
