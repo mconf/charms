@@ -11,12 +11,11 @@ sudo bash nodesource_setup.sh
 sudo apt-get update
 sudo apt-get install -y nodejs
 
-# Copying bigbluebot scripts
-cp -r utils/mconfless /home/ubuntu
-cd /home/ubuntu/mconfless
-npm install
-
 # Copying mconfless script
-cp hooks/run /home/ubuntu
-sudo chmod +x /home/ubuntu/run
+cp hooks/run ~/
+sudo chmod +x ~/run
 
+# Copying bigbluebot scripts
+cp -r utils/mconfless ~/
+cd ~/mconfless
+npm install

@@ -23,7 +23,7 @@ usage() {
 }
 
 # Gather run arguments
-while getopts ":s:h:r:b:w:l:" o; do
+while getopts ":s:h:r:b:w:l:p:" o; do
   case "${o}" in
     t)
       t=${OPTARG}
@@ -52,7 +52,7 @@ while getopts ":s:h:r:b:w:l:" o; do
   esac
 done
 
-export MCONFLESS_SCRIPT_PATH=/home/ubuntu/mconfless
+export MCONFLESS_SCRIPT_PATH=~/mconfless
 
 echo "Setting variables..."
 export BIGBLUEBOT_HOST=$h
