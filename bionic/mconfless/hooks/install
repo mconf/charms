@@ -12,10 +12,10 @@ sudo apt-get update
 sudo apt-get install -y nodejs
 
 # Copying mconfless script
-cp hooks/run ~/
+sudo cp hooks/run ~/
 sudo chmod +x ~/run
 
 # Copying bigbluebot scripts
-cp -r utils/mconfless ~/
+sudo cp -r utils/mconfless ~/
 cd ~/mconfless
 npm install
