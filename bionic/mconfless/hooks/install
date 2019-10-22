@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+sudo apt-get update
+sudo apt-get install -y curl
+
+# Installing Node
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo bash nodesource_setup.sh
+sudo apt-get update
+sudo apt-get install -y nodejs
+
+# Copying bigbluebot scripts
+cp -r utils/mconfless /home/ubuntu
+cd /home/ubuntu/mconfless
+npm install
+
+# Copying mconfless script
+cp hooks/run /home/ubuntu
+sudo chmod +x /home/ubuntu/run
+
