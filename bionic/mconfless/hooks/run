@@ -52,7 +52,7 @@ while getopts ":s:h:r:b:w:l:p:" o; do
   esac
 done
 
-export MCONFLESS_SCRIPT_PATH=~/mconfless
+export MCONFLESS_SCRIPT_PATH=/tmp/mconfless
 
 echo "Setting variables..."
 export BIGBLUEBOT_HOST=$h
