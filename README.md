@@ -33,9 +33,29 @@ for running the tests.
 
 [Running Juju with LXD](https://docs.jujucharms.com/2.3/en/clouds-LXD)
 
-*notice that LXD environment can be tricky when trying to run other
-containerized applications*
+```shell
+cd CHARMS_PATH
+sudo juju bootstrap localhost lxd-controller
+sudo juju deploy ./bionic/mconfless --series bionic
+sudo juju run "./run" --all
+```
+
+```shell
+sudo juju destroy-controller lxd-controller --destroy-all-models
+```
 
 ### AWS Cloud
 
 [Running Juju with AWS](https://docs.jujucharms.com/2.3/en/help-aws)
+
+```shell
+cd CHARMS_PATH
+sudo juju bootstrap aws
+sudo juju set-model-constraints "instance-type=c3.4xlarge"
+sudo juju deploy ./bionic/mconfless --series bionic
+sudo juju run "./run" --all
+```
+
+```shell
+juju destroy-controller aws-us-east-1 --destroy-all-models
+```

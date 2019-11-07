@@ -2,6 +2,9 @@
 
 set -e
 
+export JUJU_USER=ubuntu
+export JUJU_HOME=/home/$JUJU_USER
+
 t="join"
 h="https://test-live220.dev.mconf.com"
 r="Demo Meeting"
@@ -23,7 +26,7 @@ usage() {
 }
 
 # Gather run arguments
-while getopts ":s:h:r:b:w:l:p:" o; do
+while getopts ":t:h:r:b:p:w:l:" o; do
   case "${o}" in
     t)
       t=${OPTARG}
@@ -52,8 +55,6 @@ while getopts ":s:h:r:b:w:l:p:" o; do
   esac
 done
 
-export MCONFLESS_SCRIPT_PATH=/tmp/mconfless
-
 echo "Setting variables..."
 export BIGBLUEBOT_HOST=$h
 echo "Host: $h"
@@ -69,5 +70,4 @@ export BIGBLUEBOT_LIFE=$l
 echo "Life: $l"
 
 echo "Running..."
-cd $MCONFLESS_SCRIPT_PATH
-node $t
+nodejs $JUJU_HOME/mconfless/$t
