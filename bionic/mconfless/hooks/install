@@ -20,6 +20,10 @@ cp hooks/run $JUJU_HOME
 chmod +x $JUJU_HOME/run
 chown $JUJU_USER:$JUJU_USER $JUJU_HOME/run
 
+# Copying bigbluebot scripts
+cp -r utils/mconfless $JUJU_HOME
+chown -R $JUJU_USER:$JUJU_USER $JUJU_HOME/mconfless
+
 # Installing dependencies
 # https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix
 apt-get install -y \
@@ -62,8 +66,3 @@ apt-get install -y \
   lsb-release \
   xdg-utils \
   wget
-
-# Copying bigbluebot scripts
-cp -r utils/mconfless $JUJU_HOME
-npm install $JUJU_HOME/mconfless
-chown -R $JUJU_USER:$JUJU_USER $JUJU_HOME/mconfless
