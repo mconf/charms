@@ -7,10 +7,10 @@ Puppeteer.
 
 Bot users in a meeting that can:
 
+  - join meeting
   - listen audio
   - share audio
   - share video
-  - or simply join a meeting
 
 ### Requisites
 
@@ -24,51 +24,45 @@ Credentials to:
 
 ### Usage
 
+#### Locally
+
+```shell
+cd CHARMS_PATH
+sudo juju bootstrap localhost lxd-controller
+sudo juju deploy ./bionic/mconfless --series bionic
+sudo juju run "./run" --all
+```
+
+```shell
+sudo juju add-unit --num-units 1 mconfless
+```
+
+```shell
+sudo juju remove-unit mconfless/1
+```
+
+```shell
+sudo juju destroy-controller lxd-controller --destroy-all-models
+```
+
 #### At AWS Cloud
 
-Step by step instructions on using the charm:
 ```shell
-juju bootstrap aws
-juju set-model-constraints "instance-type=c3.4xlarge"
-juju deploy ./bionic/mconfless --series bionic
-```
-Running the test scripts:
-```shell
-juju run "sudo mconfless" --all
-```
-the *run* script accept arguments:
-```
- -t test  test script        default: join.js
- -h host  server url         default: https://test-live220.dev.mconf.com
- -r room  room name          default: "Demo Meeting"
- -b bots  number of bots     default: 1
- -w wait  time between bots  default: 2000 (2 seconds)
- -l life  bot life span      default: 60000 (60 seconds)
-```
-Where 3 bots sharing camera with 10 seconds between bots be:
-```shell
-juju run "sudo mconfless -t video.js -b 3 -w 10000" --all
-```
-Juju uses as default a 5 minutes timeout to the _run_ command. Some tests may
-last more than that so be sure to set a bigger timeout in those cases, e.g.:
-```shell
-juju run "sudo mconfless -b 100 -w 20000" --timeout 30m0s --all
+cd CHARMS_PATH
+sudo juju bootstrap aws
+sudo juju set-model-constraints "instance-type=c3.4xlarge"
+sudo juju deploy ./bionic/mconfless --series bionic
+sudo juju run "./run" --all
 ```
 
-##### Scale out usage
-
-Add more machines:
 ```shell
-juju add-unit --num-units 2 mconfless
-```
-Or remove it:
-```shell
-juju remove-unit mconfless/1
+sudo juju add-unit --num-units 1 mconfless
 ```
 
-##### After usage
-
-When running this charm at AWS, don't forget to destroy the whole environment
 ```shell
-juju destroy-controller aws-us-east-1 --destroy-all-models
+sudo juju remove-unit mconfless/1
+```
+
+```shell
+sudo juju destroy-controller aws-us-east-1 --destroy-all-models
 ```

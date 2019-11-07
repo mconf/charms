@@ -58,6 +58,8 @@ while getopts ":t:h:r:b:p:w:l:" o; do
 done
 
 echo "Setting variables..."
+export MCONFLESS_TEST=$t
+echo "Test: $t"
 export BIGBLUEBOT_HOST=$h
 echo "Host: $h"
 export BIGBLUEBOT_ROOM=$r
@@ -72,4 +74,4 @@ export BIGBLUEBOT_LIFE=$l
 echo "Life: $l"
 
 echo "Running..."
-nodejs $JUJU_HOME/mconfless/$t
+npm start --prefix $JUJU_HOME/mconfless
