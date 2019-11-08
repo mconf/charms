@@ -1,4 +1,4 @@
-# Mconftec Juju charms
+# Mconf Juju charms
 
 Juju is an open source, application and service modelling tool from Ubuntu that
 helps you deploy, manage and scale your applications on any cloud.
@@ -14,7 +14,7 @@ services, so relationships can be formed.
 ## Get these charms
 
 ```shell
-git clone https://github.com/mconftec/charms
+git clone https://github.com/mconf/charms
 ```
 
 ## Or write your own
