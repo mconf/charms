@@ -5,7 +5,7 @@ set -e
 export JUJU_USER=ubuntu
 export JUJU_HOME=/home/$JUJU_USER
 
-npm install $JUJU_HOME/mconfless
+npm install --prefix $JUJU_HOME/mconfless
 
 t="join"
 h="https://test-live220.dev.mconf.com"
