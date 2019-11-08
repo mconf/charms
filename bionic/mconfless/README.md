@@ -7,10 +7,10 @@ Puppeteer.
 
 Bot users in a meeting that can:
 
-  - join meeting
-  - listen audio
-  - share audio
-  - share video
+  - join meeting `-t join`
+  - listen audio `-t listen`
+  - share microphone `-t microphone`
+  - share video (VP8 only) `-t video`
 
 ### Requisites
 
