@@ -1,7 +1,6 @@
 # Mconfless
 
-Runs automatized tests in BigBlueButton HTML5 client using Headless Chrome and
-Puppeteer.
+Runs automated tests for BigBlueButton HTML5 client using Puppeteer.
 
 ## Load testing
 
@@ -12,7 +11,7 @@ Bot users in a meeting that can:
   - share microphone `-t microphone`
   - share video (VP8 only) `-t video`
 
-### Requisites
+### Requirements
 
 Installed in your machine:
 
