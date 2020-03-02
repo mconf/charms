@@ -9,15 +9,15 @@ sudo apt-get install --no-install-recommends \
   curl \
   software-properties-common
 
-curl -fsSL 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo add-apt-repository \
-  "deb https://packages.docker.com/1.13/apt/repo/ \
-  ubuntu-$(lsb_release -cs) \
-  main"
+  "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
 
 sudo apt-get update
-sudo apt-get -y install docker-engine
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
 # To run docker without sudo:
 #  sudo usermod -aG docker ubuntu
