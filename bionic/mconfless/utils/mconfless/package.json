@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "dotenv": "~6.1.0",
-    "bigbluebot": "^1.2.2"
+    "bigbluebot": "^1.3.3"
   },
   "author": "Pedro Beschorner Marin <pedrobmarin@gmail.com>",
   "license": "MIT"
