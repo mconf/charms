@@ -56,7 +56,7 @@ sudo ./run
 the *run* script accept arguments:
 ```
  -t test  <lis|mic|cam|all>  default: join
- -h host  server url         default: https://html5.dev.mconf.com
+ -h host  server url         default: https://test.bigbluebutton.org
  -r room  room name          default: "Test Room"
  -b bots  number of bots     default: 1
  -w wait  time between bots  default: 2000 (2 seconds)
@@ -91,7 +91,7 @@ juju run "sudo /tmp/run" --all
 the *run* script accept arguments:
 ```
  -t test  <lis|mic|cam|all>  default: join
- -h host  server url         default: https://html5.dev.mconf.com
+ -h host  server url         default: https://test.bigbluebutton.org
  -r room  room name          default: "Test Room"
  -b bots  number of bots     default: 1
  -w wait  time between bots  default: 2000 (2 seconds)
