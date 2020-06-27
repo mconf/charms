@@ -8,7 +8,7 @@ export JUJU_HOME=/home/$JUJU_USER
 npm install --prefix $JUJU_HOME/mconfless
 
 t="join"
-h="https://test-live220.dev.mconf.com"
+h="https://test.bigbluebutton.org"
 r="Demo Meeting"
 b=1
 p=1
@@ -18,7 +18,7 @@ l=60000
 usage() {
   echo "Usage: $0"
   echo "  -t test  test script        default: join"
-  echo "  -h host  server url         default: https://test-live220.dev.mconf.com"
+  echo "  -h host  server url         default: https://test.bigbluebutton.org"
   echo "  -r room  room name          default: \"Demo Meeting\""
   echo "  -b bots  number of bots     default: 1"
   echo "  -p pool  browsers pool      default: 1"
