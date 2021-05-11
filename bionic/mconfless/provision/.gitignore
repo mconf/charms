@@ -1,0 +1,6 @@
+.terraform
+*.tfstate*
+last_plan.*
+.env.local
+*.orig
+.terraform.lock.hcl
