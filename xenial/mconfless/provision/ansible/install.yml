@@ -1,0 +1,82 @@
+---
+
+- hosts: all
+  handlers:
+    - name: docker logout
+      command: docker logout
+  tasks:
+    - name: Install dependencies
+      become: yes
+      apt:
+        name:
+          - apt-transport-https
+          - curl
+          - software-properties-common
+          - python3-pip
+        update_cache: yes
+
+    - name: Add docker apt key
+      become: yes
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+
+    - name: Add docker repo
+      become: yes
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+        filename: docker
+        mode: '0644'
+        state: present
+
+    - name: Install docker
+      become: yes
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+
+    - name: Install docker library for Python
+      become: yes
+      pip:
+        name: docker
+
+    - name: Add user to docker group
+      become: yes
+      user:
+        name: '{{ ansible_ssh_user }}'
+        groups: docker
+        append: yes
+      register: reg_docker
+
+    - name: Reset ssh connection to allow user changes to affect 'current login user'
+      meta: reset_connection
+
+    - name: Load local docker authentication variables
+      include_vars:
+        file: '.docker-auth'
+        name: docker_auth
+      no_log: yes
+
+    - name: Log in DockerHub
+      docker_login:
+        username: '{{ docker_auth.user }}'
+        password: '{{ docker_auth.password }}'
+        reauthorize: yes
+      notify: docker logout
+
+    - name: Pull puppeteer image
+      docker_image:
+        name: mconf/puppeteer:html5
+        source: pull
+
+    - name: Copy run script
+      copy:
+        src: ../../hooks/run
+        dest: '{{ ansible_env.HOME }}/'
+        mode: '0755'
+
+    - name: Copy test scripts
+      synchronize:
+        src: ../../utils/scripts/
+        dest: '{{ ansible_env.HOME }}/scripts/'
