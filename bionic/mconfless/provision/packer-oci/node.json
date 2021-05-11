@@ -4,6 +4,7 @@
       "tenancy_ocid": "{{env `TF_VAR_oci_tenancy_ocid`}}",
       "fingerprint": "{{env `TF_VAR_oci_fingerprint`}}",
       "private_key_path": "{{env `TF_VAR_oci_private_key_path`}}",
+      "private_key_password": "{{env `TF_VAR_oci_private_key_password`}}",
       "region": "{{env `TF_VAR_oci_region`}}",
       "compartment_ocid": "{{env `TF_VAR_oci_compartment_ocid`}}",
       "availability_domain": "{{env `TF_VAR_oci_availability_domain`}}",
@@ -25,6 +26,7 @@
       "fingerprint": "{{user `fingerprint`}}",
       "key_file": "{{user `private_key_path`}}",
       "ssh_private_key_file": "{{user `private_key_path`}}",
+      "pass_phrase": "{{user `private_key_password`}}",
       "ssh_username": "ubuntu",
       "shape": "VM.Standard.E3.Flex",
       "shape_config": {
