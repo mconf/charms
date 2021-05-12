@@ -4,12 +4,12 @@
   "description": "Mconf's load test suite",
   "main": "index.js",
   "scripts": {
-    "start": "nodejs index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "dotenv": "~6.1.0",
-    "bigbluebot": "^1.3.3"
+    "bigbluebot": "2.0.0"
   },
   "author": "Pedro Beschorner Marin <pedrobmarin@gmail.com>",
   "license": "MIT"
