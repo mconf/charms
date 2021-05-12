@@ -1,12 +1,6 @@
 # Ansible
 
-First step is to setup the docker credentials. This is only needed if you're going to build the puppeteer-node image, otherwise the container is already in the image.
-
-```bash
-cd ansible/
-cp .docker-auth.example .docker-auth
-# insert your docker credentials on .docker-auth
-```
+The installation playbook should be ready to go with no additional configuration needed.
 
 # Initial terraform setup
 
