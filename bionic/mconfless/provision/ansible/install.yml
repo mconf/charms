@@ -1,9 +1,6 @@
 ---
 
 - hosts: all
-  handlers:
-    - name: docker logout
-      command: docker logout
   tasks:
     - name: Install dependencies
       become: yes
@@ -15,68 +12,83 @@
           - python3-pip
         update_cache: yes
 
-    - name: Add docker apt key
+    - name: Install Node.js
       become: yes
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
+      apt:
+        name: nodejs
+        state: latest
 
-    - name: Add docker repo
+    - name: Install npm
       become: yes
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
-        filename: docker
-        mode: '0644'
-        state: present
+      apt:
+        name: npm
+        state: latest
 
-    - name: Install docker
+    - name: Install Chromium dependencies
       become: yes
       apt:
         name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
+          - gconf-service
+          - libappindicator3-1
+          - libdbusmenu-gtk3-4
+          - libgbm1
+          - libwayland-server0
+          - libasound2
+          - libatk1.0-0
+          - libatk-bridge2.0-0
+          - libc6
+          - libcairo2
+          - libcups2
+          - libdbus-1-3
+          - libexpat1
+          - libfontconfig1
+          - libgcc1
+          - libgconf-2-4
+          - libgdk-pixbuf2.0-0
+          - libglib2.0-0
+          - libgtk-3-0
+          - libnspr4
+          - libpango-1.0-0
+          - libpangocairo-1.0-0
+          - libstdc++6
+          - libx11-6
+          - libx11-xcb1
+          - libxcb1
+          - libxcomposite1
+          - libxcursor1
+          - libxdamage1
+          - libxext6
+          - libxfixes3
+          - libxi6
+          - libxrandr2
+          - libxrender1
+          - libxss1
+          - libxtst6
+          - ca-certificates
+          - fonts-liberation
+          - libappindicator1
+          - libnss3
+          - lsb-release
+          - xdg-utils
+          - wget
+        update_cache: yes
 
-    - name: Install docker library for Python
+    - name: Upgrade dist
       become: yes
-      pip:
-        name: docker
-
-    - name: Add user to docker group
-      become: yes
-      user:
-        name: '{{ ansible_ssh_user }}'
-        groups: docker
-        append: yes
-      register: reg_docker
-
-    - name: Reset ssh connection to allow user changes to affect 'current login user'
-      meta: reset_connection
-
-    - name: Load local docker authentication variables
-      include_vars:
-        file: '.docker-auth'
-        name: docker_auth
-      no_log: yes
-
-    - name: Log in DockerHub
-      docker_login:
-        username: '{{ docker_auth.user }}'
-        password: '{{ docker_auth.password }}'
-        reauthorize: yes
-      notify: docker logout
-
-    - name: Pull puppeteer image
-      docker_image:
-        name: mconf/puppeteer:html5
-        source: pull
+      apt:
+        upgrade: dist
 
     - name: Copy run script
       copy:
-        src: ../../hooks/run
+        src: ../run
         dest: '{{ ansible_env.HOME }}/'
         mode: '0755'
 
     - name: Copy test scripts
       synchronize:
-        src: ../../utils/scripts/
-        dest: '{{ ansible_env.HOME }}/scripts/'
+        src: ../../utils/mconfless/
+        dest: '{{ ansible_env.HOME }}/mconfless/'
+
+    - name: Install mconfless bot scripts
+      community.general.npm:
+        path: '{{ ansible_env.HOME }}/mconfless/'
